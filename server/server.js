@@ -7,7 +7,7 @@ const path = require('path');
 // Import Apollo Server
 const { ApolloServer } = require('apollo-server-express');
 const { authMiddleware } = require('./utils/auth');
-const { typeDefs, resolvers } = require('./schemas');
+const { typeDefs, resolvers } = require('./schemas/index');
 
 // APP Configuration
 const app = express();
@@ -22,7 +22,7 @@ const server = new ApolloServer({
 
 // ------------------------------------------------------------------------------------------------
 // Middleware
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve up static assets

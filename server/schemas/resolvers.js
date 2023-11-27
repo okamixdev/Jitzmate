@@ -31,8 +31,7 @@ const resolvers = {
         allPosts: async (root, args, context) => {
             if (context.user) {
                 return await Post.find({})
-                    .select('-__v')
-                    .populate('user').select('-__v -password')
+                    .populate('user').select('-__v -password -email')
                     .populate('comments')
                     .populate('likes')
                     .populate('file')
@@ -115,14 +114,86 @@ const resolvers = {
     },
 
     Mutation: {
+        addUser: async (root, args) => {
+            // create user
+            const user = await User.create(args);
+            const token = signToken(user);
+            // return the token and user
+            return { token, user };
+        },
 
+        login: async (root, { email, password, username }) => {
+            // Search user via email or username
+            const user = await User.findOne({ email }) || await User.findOne({ username });
 
+            // Check if user exist and the throw auth error
+            if (!user) { throw new AuthenticationError("Incorrect Credentials!!") };
 
+            // Check if password is correct
+            const correctPW = await user.isCorrectPassword(password);
+            if (!correctPW) { throw new AuthenticationError("Incorrect Credentials!!") };
 
+            // Signs and return token if password/username/email is corrects
+            const token = signToken(user);
+            return { token, user };
+        },
 
+        addPost: async (root, args, context) => {
 
+            if (context.user) {
+                const postData = await Post.create(
+                    { user: context.user._id, text: args.texto, file: args.files },
+                );
+                return postData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
+        },
+
+        removePost: async (root, args, context) => {
+
+        },
+
+        addComment: async (root, args, context) => {
+
+        },
+
+        removeComment: async (root, args, context) => {
+
+        },
+
+        addFollow: async (root, args, context) => {
+
+        },
+
+        removeFollow: async (root, args, context) => {
+
+        },
+
+        addLike: async (root, args, context) => {
+
+        },
+
+        removeLike: async (root, args, context) => {
+
+        },
+
+        addBelt: async (root, args, context) => {
+
+        },
+
+        removeBelt: async (root, args, context) => {
+
+        },
+
+        addAchievement: async (root, args, context) => {
+
+        },
+
+        removeAchievement: async (root, args, context) => {
+
+        },
     }
-
 };
 
 // Export the resolvers
