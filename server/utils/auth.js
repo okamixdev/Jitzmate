@@ -4,7 +4,7 @@
 const jwt = require('jsonwebtoken');
 
 // JWT Configuration
-const secret = process.env.JWT_SECRET;
+const secret = "THIS_IS_THE-BEST_SECRET-EVER->2023";
 const expiration = '2h';
 
 // --------------------------------------------------------------------
