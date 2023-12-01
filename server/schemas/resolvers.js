@@ -32,10 +32,7 @@ const resolvers = {
             if (context.user) {
                 return await Post.find({})
                     .populate('user').select('-__v -password -email')
-                    .populate('comments')
-                    .populate('likes')
-                    .populate('file')
-                    .populate('text')
+                    .populate('likes');
             }
             // Throws new error if you are not logged in.
             throw new AuthenticationError('You need to be logged in in order to get access!')
@@ -150,48 +147,124 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in");
         },
 
-        removePost: async (root, args, context) => {
-
+        removePost: async (root, { postId }, context) => {
+            if (context.user) {
+                const postData = await Post.findOneAndDelete({
+                    _id: postId
+                });
+                return postData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
         addComment: async (root, args, context) => {
-
+            if (context.user) {
+                const commentData = await Comment.create(
+                    { user: context.user._id, comment: args.comment, post: args.post }
+                );
+                return commentData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
-        removeComment: async (root, args, context) => {
-
+        removeComment: async (root, { commentId }, context) => {
+            if (context.user) {
+                const commentData = await Comment.findOneAndDelete({
+                    _id: commentId
+                });
+                return commentData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
         addFollow: async (root, args, context) => {
-
+            if (context.user) {
+                const followData = await Follow.create(
+                    { user: context.user._id, follows: args.follows }
+                );
+                return followData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
-        removeFollow: async (root, args, context) => {
-
+        removeFollow: async (root, { followId }, context) => {
+            if (context.user) {
+                const followData = await Follow.findOneAndDelete({
+                    user: context.user._id, follows: followId
+                });
+                return followData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
-        addLike: async (root, args, context) => {
+        addLike: async (root, { post }, context) => {
+            if (context.user) {
+                const likeData = Post.findOneAndUpdate(
+                    { _id: post },
+                    { $push: { likes: context.user._id } }
+                );
+                return likeData;
+            };
 
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
-        removeLike: async (root, args, context) => {
-
+        removeLike: async (root, { postId }, context) => {
+            if (context.user) {
+                const likeData = Post.findOneAndUpdate(
+                    { _id: postId },
+                    { $pull: { likes: context.user._id } }
+                )
+                return likeData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
         addBelt: async (root, args, context) => {
-
+            if (context.user) {
+                const beltData = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { belt: args.belt }
+                )
+                return beltData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
         removeBelt: async (root, args, context) => {
-
+            if (context.user) {
+                const beltData = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { belt: args.beltId } }
+                )
+                return beltData;
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
         addAchievement: async (root, args, context) => {
+            if (context.user) {
 
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
 
         removeAchievement: async (root, args, context) => {
+            if (context.user) {
 
+            };
+            // Throws an auth error if the user is not logged in.
+            throw new AuthenticationError("You need to be logged in");
         },
     }
 };

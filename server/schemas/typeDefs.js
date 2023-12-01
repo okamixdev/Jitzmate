@@ -85,13 +85,13 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addPost(texto: String!, files: String!): Post
         removePost(postId: ID!): Post
-        addComment(user: ID!, comment: String!, post: ID!): Comment
+        addComment(comment: String!, post: ID!): Comment
         removeComment(commentId: ID!): Comment
-        addFollow(user: ID!, follows: String!): Follow
+        addFollow(follows: ID!): Follow
         removeFollow(followId: ID!): Follow
-        addLike(user: ID!, post: ID!): Post
+        addLike(post: ID!): Post
         removeLike(postId: ID!): Post
-        addBelt(user: ID!, belt: String!): Belt
+        addBelt(belt: ID!): Belt
         removeBelt(beltId: ID!): Belt
         addAchievement(user: ID!, achievement: String!): Achievements
         removeAchievement(achievementId: ID!): Achievements
