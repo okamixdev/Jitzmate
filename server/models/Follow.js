@@ -12,8 +12,8 @@ const followSchema = new Schema({
         ref: 'User'
     },
     follows: {
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
 
 });
