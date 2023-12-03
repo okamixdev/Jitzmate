@@ -112,12 +112,25 @@ const resolvers = {
 
     Mutation: {
         addUser: async (root, args) => {
-            // create user
-            const user = await User.create(args);
-            const token = signToken(user);
-            // return the token and user
-            return { token, user };
+
+            let users = await User.find({
+                $or: [
+                    { username: args.username.toLowerCase() },
+                    { email: args.email.toLowerCase() }
+                ]
+            });
+
+            if (users && users.length >= 1) {
+                throw new Error("Duplicated User!")
+            } else {
+                // create user
+                const user = await User.create(args);
+                const token = signToken(user);
+                // return the token and user
+                return { token, user };
+            }
         },
+
 
         login: async (root, { email, password, username }) => {
             // Search user via email or username
@@ -181,14 +194,27 @@ const resolvers = {
         },
 
         addFollow: async (root, args, context) => {
+
             if (context.user) {
-                const followData = await Follow.create(
-                    { user: context.user._id, follows: args.follows }
-                );
-                return followData;
-            };
+                let followValidator = await Follow.find({
+                    $or: [
+                        { user: context.user._id },
+                        { follows: args.follows }
+                    ]
+                })
+
+                if (followValidator && followValidator.length >= 1) {
+                    throw new Error("You already follow this user!")
+                } else {
+                    const followData = await Follow.create(
+                        { user: context.user._id, follows: args.follows }
+                    );
+                    return followData;
+                }
+            }
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
+
         },
 
         removeFollow: async (root, { followId }, context) => {
@@ -204,11 +230,22 @@ const resolvers = {
 
         addLike: async (root, { post }, context) => {
             if (context.user) {
-                const likeData = Post.findOneAndUpdate(
-                    { _id: post },
-                    { $push: { likes: context.user._id } }
-                );
-                return likeData;
+                let likeValidator = await Post.find({
+                    $or: [
+                        { _id: post },
+                        { likes: args.context.user._id }
+                    ]
+                })
+
+                if (likeValidator && likeValidator.length >= 1) {
+                    throw new Error("You already Liked this post!")
+                } else {
+                    const likeData = Post.findOneAndUpdate(
+                        { _id: post },
+                        { $push: { likes: context.user._id } }
+                    );
+                    return likeData;
+                }
             };
 
             // Throws an auth error if the user is not logged in.
@@ -229,11 +266,22 @@ const resolvers = {
 
         addBelt: async (root, args, context) => {
             if (context.user) {
-                const beltData = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { belt: args.belt }
-                )
-                return beltData;
+                let beltValidator = await User.find({
+                    $or: [
+                        { _id: context.user._id },
+                        { belt: args.belt }
+                    ]
+                })
+
+                if (beltValidator && beltValidator.length >= 1) {
+                    throw new Error("You already have this belt!")
+                } else {
+                    const beltData = await User.findOneAndUpdate(
+                        { _id: context.user._id },
+                        { belt: args.belt }
+                    )
+                    return beltData;
+                }
             };
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
