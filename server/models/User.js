@@ -39,14 +39,14 @@ const userSchema = new Schema({
         type: String,
         default: 'https://i.imgur.com/2WZtvrC.png',
     },
-    follows: {
+    follows: [{
         type: Schema.Types.ObjectId,
         ref: 'Follow'
-    },
-    followers: {
+    }],
+    followers: [{
         type: Schema.Types.ObjectId,
         ref: 'Follow'
-    },
+    }],
     achievements: {
         type: Schema.Types.ObjectId,
         ref: 'Achievements'
@@ -91,6 +91,11 @@ userSchema.pre('save', async function (next) {
 // Method for the model to validate the password when logged in
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
+};
+
+// Method for the model to validate the password when logged in
+userSchema.methods.showFollows = function () {
+    return this.follows;
 };
 
 // Method to get the user's full name

@@ -5,9 +5,75 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #030303;
+  color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* --------------------------------------------------------------------------- */
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+.navbar h1 {
+  margin-left: 30px;
+}
+
+.navbar h1:hover {
+  color: aqua;
+  transform: scale(1.01);
+  transition: 700ms all;
+  cursor: pointer;
+}
+
+.navList {
+  display: flex;
+  gap: 30px;
+  margin-right: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.navList li {
+  list-style: none;
+}
+
+.unactive {
+  color: white;
+}
+
+.active {
+  color: aqua;
+}
+
+.navList i:hover {
+  color: aqua;
+  transform: scale(1.1);
+  transition: 700ms all;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------- */
+/* LOGIN / SIGNUP */
+
+
+
+
+/* --------------------------------------------------------------------------- */
+/* PROFILE */
+
+
+
+
+
+/* --------------------------------------------------------------------------- */
+/* FEED */

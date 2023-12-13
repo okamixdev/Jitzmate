@@ -98,12 +98,17 @@ const resolvers = {
 
         feed: async (root, args, context) => {
             if (context.user) {
-                return await Post.find({ user: { $in: context.user.follows } })
+
+                const user = await User.findOne({ _id: context.user._id });
+                const feedInfo = await Post.find({ user: { $in: user.follows } })
                     .populate('user').select('-__v -password')
                     .populate('comments')
                     .populate('likes')
                     .populate('file')
                     .populate('text')
+
+                console.log(feedInfo);
+                return feedInfo;
             }
             // Throws new error if you are not logged in.
             throw new AuthenticationError('You need to be logged in in order to get access!')
@@ -197,19 +202,26 @@ const resolvers = {
 
             if (context.user) {
                 let followValidator = await Follow.find({
-                    $or: [
-                        { user: context.user._id },
-                        { follows: args.follows }
-                    ]
+                    user: context.user._id, follows: args.follows
                 })
 
                 if (followValidator && followValidator.length >= 1) {
+                    console.log(followValidator);
                     throw new Error("You already follow this user!")
+
                 } else {
                     const followData = await Follow.create(
                         { user: context.user._id, follows: args.follows }
                     );
-                    return followData;
+                    const userData = await User.findOneAndUpdate(
+                        { _id: context.user._id },
+                        { $push: { follows: args.follows } }
+                    );
+                    const otherUserData = await User.findOneAndUpdate(
+                        { _id: args.follows },
+                        { $push: { followers: context.user._id } }
+                    );
+                    return followData, userData, otherUserData;
                 }
             }
             // Throws an auth error if the user is not logged in.
@@ -231,10 +243,7 @@ const resolvers = {
         addLike: async (root, { post }, context) => {
             if (context.user) {
                 let likeValidator = await Post.find({
-                    $or: [
-                        { _id: post },
-                        { likes: args.context.user._id }
-                    ]
+                    _id: post, likes: args.context.user._id
                 })
 
                 if (likeValidator && likeValidator.length >= 1) {
