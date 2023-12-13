@@ -74,7 +74,7 @@ const typeDefs = gql`
         findFollows(username: ID!): [Follow]
         findBelt(username: ID!): [Belt]
         findAchievements(username: ID!): [Achievements]
-        feed(user: ID!): [Post]
+        feed: [Post]
     }
 
 
