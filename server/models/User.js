@@ -51,10 +51,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Achievements'
     },
-    posts: {
+    posts: [{
         type: Schema.Types.ObjectId,
         ref: 'Post'
-    },
+    }],
     belt: {
         type: Schema.Types.ObjectId,
         ref: 'Belt'

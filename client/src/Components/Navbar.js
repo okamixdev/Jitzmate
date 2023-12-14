@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import { Create } from './pages/Create';
 import { Notifications } from './pages/Notifications';
 import { Profile } from './pages/Profile';
+import { Login } from './pages/Login';
 
 export const Navbar = () => {
   return (
@@ -24,6 +25,9 @@ export const Navbar = () => {
             <li>
               <NavLink className={({ isActive }) => isActive ? "active" : "unactive"} to="/profile"><i class="fa-solid fa-user"></i></NavLink>
             </li>
+            <li>
+              <NavLink className={({ isActive }) => isActive ? "active" : "unactive"} to="/login"><i class="fa-solid fa-right-to-bracket"></i></NavLink>
+            </li>
           </ul>
         </navbar>
 
@@ -33,6 +37,7 @@ export const Navbar = () => {
           <Route path="/create" element={<Create />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>
