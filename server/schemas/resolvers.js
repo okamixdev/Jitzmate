@@ -21,7 +21,8 @@ const resolvers = {
                     .populate('follows')
                     .populate({ path: 'follows', model: 'User' })
                     .populate('achievements')
-                    .populate('belt');
+                    .populate({ path: 'belt', model: 'Belt' })
+
 
                 // Return the user data and take out the password and __v fields.
                 return userData;
@@ -59,6 +60,7 @@ const resolvers = {
                     .populate('user').select('-__v -password')
                     .populate('post')
                     .populate('comment')
+                    .populate('likes')
             }
             // Throws new error if you are not logged in.
             throw new AuthenticationError('You need to be logged in in order to get access!')
@@ -82,8 +84,12 @@ const resolvers = {
 
         findBelt: async (root, args, context) => {
             if (context.user) {
-                return await User.findOne({ user: args.username })
+                const userInfo = await User.findOne({ _id: context.user._id })
                     .populate('belt')
+
+                const beltInfo = await Belt.findOne({ _id: userInfo.belt })
+
+                return beltInfo;
             }
             // Throws new error if you are not logged in.
             throw new AuthenticationError('You need to be logged in in order to get access!')
@@ -109,7 +115,6 @@ const resolvers = {
                     .populate('file')
                     .populate('text')
 
-                console.log(feedInfo);
                 return feedInfo;
             }
             // Throws new error if you are not logged in.
@@ -224,7 +229,6 @@ const resolvers = {
                 })
 
                 if (followValidator && followValidator.length >= 1) {
-                    console.log(followValidator);
                     throw new Error("You already follow this user!")
 
                 } else {
