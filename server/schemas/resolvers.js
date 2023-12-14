@@ -17,7 +17,9 @@ const resolvers = {
                     .select('-__v -password')
                     .populate('posts')
                     .populate('followers')
+                    .populate({ path: 'followers', model: 'User' })
                     .populate('follows')
+                    .populate({ path: 'follows', model: 'User' })
                     .populate('achievements')
                     .populate('belt');
 
@@ -38,9 +40,9 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in in order to get access!')
         },
 
-        findPosts: async (root, args, context) => {
+        findPosts: async (root, { username }, context) => {
             if (context.user) {
-                return await Post.findOne({ user: args._id })
+                return await Post.find({ user: username })
                     .populate('user').select('-__v -password')
                     .populate('comments')
                     .populate('likes')
@@ -51,9 +53,9 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in in order to get access!')
         },
 
-        findComments: async (root, args, context) => {
+        findComments: async (root, { postId }, context) => {
             if (context.user) {
-                return await Comment.findOne({ _id: args.postId })
+                return await Comment.find({ post: postId })
                     .populate('user').select('-__v -password')
                     .populate('post')
                     .populate('comment')
@@ -189,7 +191,11 @@ const resolvers = {
                 const commentData = await Comment.create(
                     { user: context.user._id, comment: args.comment, post: args.post }
                 );
-                return commentData;
+                const postData = await Post.findOneAndUpdate(
+                    { _id: args.post },
+                    { $push: { comments: commentData._id } }
+                );
+                return commentData, postData;
             };
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
@@ -200,7 +206,11 @@ const resolvers = {
                 const commentData = await Comment.findOneAndDelete({
                     _id: commentId
                 });
-                return commentData;
+                const postData = await Post.findOneAndUpdate(
+                    { _id: args.post },
+                    { $pull: { comments: commentData._id } }
+                );
+                return commentData, postData;
             };
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
