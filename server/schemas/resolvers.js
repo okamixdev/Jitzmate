@@ -159,7 +159,11 @@ const resolvers = {
                 const postData = await Post.create(
                     { user: context.user._id, text: args.texto, file: args.files },
                 );
-                return postData;
+                const userData = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { posts: postData._id } }
+                );
+                return postData, userData;
             };
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
@@ -170,7 +174,11 @@ const resolvers = {
                 const postData = await Post.findOneAndDelete({
                     _id: postId
                 });
-                return postData;
+                const userData = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { posts: postId } }
+                );
+                return postData, userData;
             };
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
