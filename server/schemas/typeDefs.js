@@ -20,7 +20,7 @@ const typeDefs = gql`
         followers: [Follow]
         follows: [Follow]
         achievements: [Achievements]
-        belt: [Belt]
+        belt: Belt
     }
 
     type Post {
@@ -72,7 +72,7 @@ const typeDefs = gql`
         findComments(postId: ID!): [Comment]
         findFollowers(username: ID!): [Follow]
         findFollows(username: ID!): [Follow]
-        findBelt(username: ID!): [Belt]
+        findBelt: Belt
         findAchievements(username: ID!): [Achievements]
         feed: [Post]
     }
