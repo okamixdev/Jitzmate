@@ -13,9 +13,9 @@ export const LOGIN_USER = gql`
     }
 `;
 
-export const ADD_USER = gql`
+// export const ADD_USER = gql`
 
-`;
+// `;
 
 export const ADD_POST = gql`
     mutation AddPost($texto: String!, $files: String!) {
