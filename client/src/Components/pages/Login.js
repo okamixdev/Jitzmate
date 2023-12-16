@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN_USER } from '../../Utils/mutations'
+import { ADD_USER } from '../../Utils/mutations'
 import Auth from '../../Utils/auth'
 
 export const Login = () => {
@@ -12,9 +13,10 @@ export const Login = () => {
     email: "", password: "",
     first: "", last: "", username: ""
   });
+  const [addUser] = useMutation(ADD_USER);
 
 
-  const handleFormSubmit = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -23,23 +25,46 @@ export const Login = () => {
       });
 
       Auth.login(data.login.token);
-      console.log(userFormData)
 
     } catch (err) {
       console.log(err)
     }
 
-    // setUserFormData({
-    //   email: "",
-    //   password: ""
-    // })
-
-
-
+    setUserFormData({
+      email: "",
+      password: ""
+    })
   };
-  const handleInputChange = async (e) => {
+
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await addUser({
+        variables: { ...userRegisterData }
+      });
+
+      Auth.login(data.addUser.token);
+
+    } catch (err) {
+      console.log(err)
+    }
+
+    setUserRegisterData({
+      email: "", password: "",
+      first: "", last: "", username: ""
+    })
+  };
+
+
+  const handleInputLogChange = async (e) => {
     const { name, value } = e.target;
     setUserFormData({ ...userFormData, [name]: value });
+  };
+
+  const handleInputSignChange = async (e) => {
+    const { name, value } = e.target;
+    setUserRegisterData({ ...userRegisterData, [name]: value });
   };
 
   const handleRegisterBtn = async (e) => {
@@ -61,22 +86,22 @@ export const Login = () => {
     <>
       <div className='container'>
         <div className='form-container sign-up'>
-          <form className='signup' onSubmit={handleFormSubmit}>
+          <form className='signup' onSubmit={handleSignUpSubmit}>
             <h1>Create Account</h1>
-            <input type='text' placeholder='First Name' name="first" value={userFormData.email} onChange={handleInputChange} />
-            <input type='text' name="last" placeholder='Last Name' value={userFormData.password} onChange={handleInputChange} />
-            <input type='text' placeholder='Username' name="username" value={userFormData.email} onChange={handleInputChange} />
-            <input type='text' name="email" placeholder='Email' value={userFormData.password} onChange={handleInputChange} />
-            <input type='password' name="password" placeholder='Password' value={userFormData.password} onChange={handleInputChange} />
+            <input type='text' placeholder='First Name' name="first" value={userRegisterData.first} onChange={handleInputSignChange} />
+            <input type='text' placeholder='Last Name' name="last" value={userRegisterData.last} onChange={handleInputSignChange} />
+            <input type='text' placeholder='Username' name="username" value={userRegisterData.username} onChange={handleInputSignChange} />
+            <input type='text' placeholder='Email' name="email" value={userRegisterData.email} onChange={handleInputSignChange} />
+            <input type='password' placeholder='Password' name="password" value={userRegisterData.password} onChange={handleInputSignChange} />
             <button type='submit' placeholder='login' >Sign Up</button>
           </form>
         </div>
 
         <div className='form-container sign-in'>
-          <form className='login' onSubmit={handleFormSubmit}>
+          <form className='login' onSubmit={handleLoginSubmit}>
             <h1>Sign In</h1>
-            <input type='text' placeholder='Email or Username' name="email" value={userFormData.email} onChange={handleInputChange} />
-            <input type='password' name="password" placeholder='Password' value={userFormData.password} onChange={handleInputChange} />
+            <input type='text' placeholder='Email or Username' name="email" value={userFormData.email} onChange={handleInputLogChange} />
+            <input type='password' name="password" placeholder='Password' value={userFormData.password} onChange={handleInputLogChange} />
             <button type='submit' placeholder='login' >Sign In</button>
           </form>
         </div>

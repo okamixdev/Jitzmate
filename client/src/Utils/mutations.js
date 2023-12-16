@@ -13,9 +13,16 @@ export const LOGIN_USER = gql`
     }
 `;
 
-// export const ADD_USER = gql`
-
-// `;
+export const ADD_USER = gql`
+    mutation AddUser($first: String!, $last: String!, $username: String!, $email: String!, $password: String!) {
+    addUser(first: $first, last: $last, username: $username, email: $email, password: $password) {
+        token
+        user {
+        _id
+        }
+    }
+    }
+`;
 
 export const ADD_POST = gql`
     mutation AddPost($texto: String!, $files: String!) {
