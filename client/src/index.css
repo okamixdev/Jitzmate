@@ -319,3 +319,43 @@ code {
 
 /* --------------------------------------------------------------------------- */
 /* FEED */
+
+.card-container {
+  background-color: #45a29e;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 30px;
+}
+
+.card-user-info {
+  display: flex;
+}
+
+.card-user-info img {
+  height: 50px;
+  width: auto;
+  border-radius: 500px;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin: 0 10px 0 10px;
+}
+
+.like-comment i {
+  margin-left: 10px;
+  font-size: 23px;
+}
+
+/* --------------------------------------------------------------------------- */
+/* COMMENTS */
+.comment-container {
+  background: #1F2833;
+}
