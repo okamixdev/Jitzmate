@@ -76,9 +76,9 @@ export const FIND_BELT = gql`
     }
 `;
 
-export const FIND_ACHIEVEMENTS = gql`
+// export const FIND_ACHIEVEMENTS = gql`
 
-`;
+// `;
 
 export const FEED = gql`
     query Feed {
