@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Post } from '../Post';
 import { useQuery, useMutation } from '@apollo/client';
 import { FEED } from '../../Utils/queries';
+import Auth from '../../Utils/auth';
 
 
 
@@ -27,6 +28,7 @@ export const Home = () => {
                         postImage='https://media.gettyimages.com/id/1401887026/photo/asian-man-practicing-brazilian-jujutsu-closeup-of-hand-holding-belt.jpg?s=2048x2048&w=gi&k=20&c=qBLR4wtKXyu8Lh9Hj2JhrbmlQbjVLlyt1IBIok4hAqw='
                         caption={post.text}
                         postId={post._id}
+                        userID={Auth.getProfile().data._id}
                     />
                 )
 

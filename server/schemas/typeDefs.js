@@ -40,7 +40,7 @@ const typeDefs = gql`
 
     type Comment {
         _id: ID
-        user: [User]
+        user: User
         comment: String!
         post: [Post]
         likes: [User]
