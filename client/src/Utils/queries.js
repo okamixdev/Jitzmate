@@ -45,7 +45,10 @@ export const FIND_COMMENT = gql`
         _id
         comment
         likes {
-        _id
+            _id
+        }
+        user {
+            username
         }
     }
     }

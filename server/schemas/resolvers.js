@@ -43,7 +43,7 @@ const resolvers = {
 
         findPosts: async (root, { username }, context) => {
             if (context.user) {
-                return await Post.find({ user: username })
+                return await Post.find({ _id: username })
                     .populate('user').select('-__v -password')
                     .populate('comments')
                     .populate('likes')
@@ -57,7 +57,8 @@ const resolvers = {
         findComments: async (root, { postId }, context) => {
             if (context.user) {
                 return await Comment.find({ post: postId })
-                    .populate('user').select('-__v -password')
+                    // .populate('user').select('-__v -password')
+                    .populate({ path: 'user', model: 'User' })
                     .populate('post')
                     .populate('comment')
                     .populate('likes')
@@ -265,7 +266,7 @@ const resolvers = {
         addLike: async (root, { post }, context) => {
             if (context.user) {
                 let likeValidator = await Post.find({
-                    _id: post, likes: args.context.user._id
+                    _id: post, likes: context.user._id
                 })
 
                 if (likeValidator && likeValidator.length >= 1) {

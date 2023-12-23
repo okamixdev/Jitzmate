@@ -321,24 +321,29 @@ code {
 /* FEED */
 
 .card-container {
-  background-color: #45a29e;
+  background-color: #1f2833;
   display: flex;
   flex-direction: column;
   width: 500px;
   height: auto;
   margin: 0 auto;
   margin-top: 40px;
-  border-radius: 30px;
+  margin-bottom: 40px;
+  border-radius: 10px;
 }
 
 .card-user-info {
   display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
 }
 
 .card-user-info img {
-  height: 50px;
-  width: auto;
-  border-radius: 500px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
 }
 
 .caption {
@@ -347,6 +352,11 @@ code {
   align-items: center;
   text-align: center;
   margin: 0 10px 0 10px;
+  height: 30px;
+}
+
+.caption h2 {
+  font-size: 15px;
 }
 
 .like-comment i {
@@ -354,8 +364,31 @@ code {
   font-size: 23px;
 }
 
+.like-comment .boton:hover {
+  transform: scale(1.05);
+  color: #66fcf1;
+  transition: all 0.2s ease-in-out;
+}
+
+.like-comment .b-activate {
+ 
+}
+
 /* --------------------------------------------------------------------------- */
 /* COMMENTS */
 .comment-container {
-  background: #1F2833;
+  background: #45a29e;
+  border-radius: 0 0 6px 6px;
+}
+
+.comment-container p {
+  margin-left: 10px;
+}
+
+.comment-info {
+  display: flex;
+}
+
+.comment-info .u-name {
+  font-weight: 600;
 }
