@@ -35,6 +35,7 @@ export const FIND_POST = gql`
         _id
         username
         }
+        likeCount
     }
     }
 `;
