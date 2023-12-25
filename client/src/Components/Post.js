@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useQuery, useMutation } from '@apollo/client';
 import { FIND_COMMENT } from '../Utils/queries'
 import { ADD_LIKE } from '../Utils/mutations'
+import { REMOVE_LIKE } from '../Utils/mutations';
 import { Comment } from './Comment';
 import { FIND_POST } from '../Utils/queries';
 
@@ -15,8 +16,10 @@ export const Post = (props) => {
 
     const postData = useQuery(FIND_POST, { variables: { username: props.postId } });
 
-    const [like] = useMutation(ADD_LIKE);
+    const [like] = useMutation(ADD_LIKE, { refetchQueries: [FIND_POST] });
     const [liked, setLiked] = useState(false);
+
+    const [dislike] = useMutation(REMOVE_LIKE, { refetchQueries: [FIND_POST] });
 
     useEffect(() => {
         if (data) {
@@ -32,24 +35,24 @@ export const Post = (props) => {
             const { data } = await like({
                 variables: { post: props.postId }
             })
+            setLiked(true);
         } catch (err) {
             console.log(err)
         }
     }
 
-    // const handleDislike = async (e) => {
-    //     e.preventDefault();
+    const handleDislike = async (e) => {
+        e.preventDefault();
 
-    //     try {
-    //         await like({
-    //             variables: { post: ID }
-    //         })
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-
-    console.log(postData.data)
+        try {
+            await dislike({
+                variables: { postId: props.postId }
+            })
+        } catch (err) {
+            console.log(err)
+        }
+        setLiked(false);
+    }
 
     return (
         <div className='card-container'>
@@ -62,10 +65,12 @@ export const Post = (props) => {
             <div className='caption'>
                 <h2>{props.caption}</h2>
                 <div className='like-comment'>
-                    {/* {postData.data.findPosts.likes.find((element) => element == props.userID) ?
+                    {postData.data?.findPosts[0].likes.find((element) => element._id === props.userID) ?
+
                         (
+
                             <>
-                                <i class="fa-solid fa-heart"></i>
+                                <i class="fa-solid fa-heart b-activate" onClick={handleDislike}></i>
                             </>
                         )
                         :
@@ -74,7 +79,8 @@ export const Post = (props) => {
                                 <i className="fa-regular fa-heart boton b-activate" onClick={handleLike}></i>
                             </>
                         )
-                    } */}
+                    }
+                    <div className='count b-activate'>{postData.data?.findPosts[0].likeCount}</div>
 
                     <i className="fa-regular fa-comment boton b-activate"></i>
                 </div>
