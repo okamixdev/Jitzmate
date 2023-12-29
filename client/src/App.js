@@ -1,6 +1,7 @@
 import { Navbar } from './Components/Navbar';
 import React from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { setContext } from 'apollo-link-context';
 
 // --------------------------------------------------------------------------------
@@ -28,6 +29,9 @@ const authLink = setContext((_, { headers }) => {
 // Create Apollo Clinet
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
+  // link: new createUploadLink({
+  //   uri: 'http://localhost:3000/'
+  // }),
   cache: new InMemoryCache(),
 });
 

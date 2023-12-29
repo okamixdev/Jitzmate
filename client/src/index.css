@@ -118,6 +118,10 @@ code {
   margin: 5px;
 } */
 
+.login-container {
+  min-height: 100vh;
+}
+
 .container {
   margin: 0 auto;
   margin-top: 100px;
@@ -334,8 +338,12 @@ code {
 /* --------------------------------------------------------------------------- */
 /* FEED */
 
+.feed-container {
+  min-height: 100vh;
+}
+
 .card-container {
-  background-image: linear-gradient(to right, #434343 0%, black 100%);;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
   display: flex;
   flex-direction: column;
   width: 500px;
@@ -427,3 +435,31 @@ code {
 .comment-info .u-name {
   font-weight: 600;
 }
+
+
+/* --------------------------------------------------------------------------- */
+/* CREATE POST */
+.create-container {
+  min-height: 100vh;
+
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+}
+
+.create-post-form {
+  display: flex;
+  width: 400px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 3px solid var(--accent2);
+  padding: 100px 300px 100px 300px;
+}
+
+.create-post-form .files {
+  margin-left: 76px;
+}
+
+.create-post-form {}
