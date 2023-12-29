@@ -3,6 +3,8 @@
 const express = require('express');
 const db = require('./config/connection')
 const path = require('path');
+const routes = require('./routes');
+const cors = require('cors')
 
 // Import Apollo Server
 const { ApolloServer } = require('apollo-server-express');
@@ -24,6 +26,12 @@ const server = new ApolloServer({
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// CORS Configuration
+app.use(cors());
+
+// Use the routes
+app.use(routes);
 
 // Serve up static assets
 if (process.env.NODE_ENV === 'production') {

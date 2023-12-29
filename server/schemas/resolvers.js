@@ -4,6 +4,8 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Post, User, Achievements, Belt, Comment, Follow } = require('../models/index');
 const { signToken } = require('../utils/auth');
+const path = require('path');
+const fs = require('fs');
 
 // ----------------------------------------------------------------
 // Resolvers for the typeDefs
@@ -120,7 +122,8 @@ const resolvers = {
             }
             // Throws new error if you are not logged in.
             throw new AuthenticationError('You need to be logged in in order to get access!')
-        }
+        },
+
     },
 
     Mutation: {
@@ -164,6 +167,7 @@ const resolvers = {
         addPost: async (root, args, context) => {
 
             if (context.user) {
+                uploads.single('file')
                 const postData = await Post.create(
                     { user: context.user._id, text: args.texto, file: args.files },
                 );

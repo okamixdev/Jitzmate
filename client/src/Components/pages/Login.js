@@ -83,7 +83,7 @@ export const Login = () => {
 
 
   return (
-    <>
+    <div className='login-container'>
       <div className='container'>
         <div className='form-container sign-up'>
           <form className='signup' onSubmit={handleSignUpSubmit}>
@@ -123,7 +123,7 @@ export const Login = () => {
 
       </div>
 
-    </>
+    </div>
 
 
   )

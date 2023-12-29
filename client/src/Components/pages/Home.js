@@ -18,12 +18,13 @@ export const Home = () => {
     }, [data])
 
     return (
-        <>
+        <div className='feed-container'>
 
             {feedData.feed?.map(post => {
 
                 return (
-                    <Post username='demoUser'
+                    <Post
+                        username='demoUser'
                         avatar='https://www.shutterstock.com/image-vector/user-profile-icon-trendy-flat-260nw-1923506948.jpg'
                         postImage='https://media.gettyimages.com/id/1401887026/photo/asian-man-practicing-brazilian-jujutsu-closeup-of-hand-holding-belt.jpg?s=2048x2048&w=gi&k=20&c=qBLR4wtKXyu8Lh9Hj2JhrbmlQbjVLlyt1IBIok4hAqw='
                         caption={post.text}
@@ -38,6 +39,6 @@ export const Home = () => {
 
 
 
-        </>
+        </div>
     )
 }

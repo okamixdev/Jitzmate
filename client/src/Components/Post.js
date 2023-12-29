@@ -58,7 +58,7 @@ export const Post = (props) => {
         <div className='card-container'>
             <div className='card-user-info'>
                 <img src={props.avatar}></img>
-                <h3>{props.username}</h3>
+                <h3>{postData.data?.findPosts[0].user.username}</h3>
             </div>
 
             <img src={props.postImage}></img>
