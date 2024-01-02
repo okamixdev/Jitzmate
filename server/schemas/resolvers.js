@@ -167,7 +167,6 @@ const resolvers = {
         addPost: async (root, args, context) => {
 
             if (context.user) {
-                uploads.single('file')
                 const postData = await Post.create(
                     { user: context.user._id, text: args.texto, file: args.files },
                 );
@@ -175,7 +174,7 @@ const resolvers = {
                     { _id: context.user._id },
                     { $push: { posts: postData._id } }
                 );
-                return postData, userData;
+                return postData;
             };
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
