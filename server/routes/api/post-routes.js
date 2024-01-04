@@ -8,7 +8,7 @@ const withAuth = require('../../utils/restAuth');
 const { uploads, storage } = require('../../utils/multer-settings');
 
 router.post('/upload/:id', [withAuth.auth, uploads.single('file')], postController.uploadImage);
-router.get('/getImage/:postId', withAuth.auth, postController.showImage);
+router.get('/getImage/:postId', postController.showImage);
 
 // Export the router
 module.exports = router;

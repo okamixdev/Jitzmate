@@ -5,6 +5,8 @@ import { ADD_LIKE } from '../Utils/mutations'
 import { REMOVE_LIKE } from '../Utils/mutations';
 import { Comment } from './Comment';
 import { FIND_POST } from '../Utils/queries';
+import axios from 'axios'
+import Auth from '../Utils/auth';
 
 
 
@@ -54,6 +56,20 @@ export const Post = (props) => {
         setLiked(false);
     }
 
+    const headers = {
+        'Authorization': `${Auth.getToken()}`,
+        "Content-Type": "multipart/form-data"
+    }
+
+    const postImage = () => {
+        const imageInfo = axios.get(`http://localhost:3001/api/post/getImage/${ID}`, { headers: headers })
+            .then(response => { console.log(response) })
+            .catch(error => console.log(error))
+    };
+
+    const imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
+
+
     return (
         <div className='card-container'>
             <div className='card-user-info'>
@@ -61,7 +77,7 @@ export const Post = (props) => {
                 <h3>{postData.data?.findPosts[0].user.username}</h3>
             </div>
 
-            <img src={props.postImage}></img>
+            <img src={imgSource}></img>
             <div className='caption'>
                 <h2>{props.caption}</h2>
                 <div className='like-comment'>

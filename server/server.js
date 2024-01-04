@@ -37,6 +37,7 @@ const server = new ApolloServer({
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use("/uploads/postImages", express.static('uploads'))
 
 // CORS Configuration
 app.use(cors());
