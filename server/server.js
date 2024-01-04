@@ -5,15 +5,26 @@ const db = require('./config/connection')
 const path = require('path');
 const routes = require('./routes');
 const cors = require('cors')
+const bodyParser = require("body-parser");
 
 // Import Apollo Server
 const { ApolloServer } = require('apollo-server-express');
 const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas/index');
 
+// / 
+var allowCrossDomain = function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    next();
+};
+
 // APP Configuration
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(allowCrossDomain);
 
 // Create new Apollo Server
 const server = new ApolloServer({
@@ -26,9 +37,11 @@ const server = new ApolloServer({
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use("/uploads/postImages", express.static('uploads'))
 
 // CORS Configuration
 app.use(cors());
+app.use(bodyParser.json());
 
 // Use the routes
 app.use(routes);
