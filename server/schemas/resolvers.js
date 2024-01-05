@@ -33,6 +33,20 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in in order to get access!')
         },
 
+        findUser: async (root, args, context) => {
+            if (context.user) {
+                return await User.findOne({ _id: args.userID })
+                    .select('-__v -password')
+                    .populate('posts')
+                    .populate('followers')
+                    .populate({ path: 'followers', model: 'User' })
+                    .populate('follows')
+                    .populate({ path: 'follows', model: 'User' })
+                    .populate('achievements')
+                    .populate({ path: 'belt', model: 'Belt' })
+            }
+        },
+
         allPosts: async (root, args, context) => {
             if (context.user) {
                 return await Post.find({})

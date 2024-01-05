@@ -22,6 +22,10 @@ const typeDefs = gql`
         follows: [Follow]
         achievements: [Achievements]
         belt: Belt
+        followsCount: Int!
+        followersCount: Int!
+        fullName: String!
+        postsCount: Int!
     }
 
     type Post {
@@ -70,6 +74,7 @@ const typeDefs = gql`
     # QUERIES
     type Query {
         me: User
+        findUser(userID: ID!): User
         allPosts: [Post]
         findPosts(username: ID!): [Post]
         findComments(postId: ID!): [Comment]

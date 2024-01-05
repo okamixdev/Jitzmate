@@ -6,6 +6,7 @@ import { Notifications } from './pages/Notifications';
 import { Profile } from './pages/Profile';
 import { Login } from './pages/Login';
 import Auth from "../Utils/auth"
+import { OUser } from './pages/OUser';
 
 
 
@@ -60,6 +61,7 @@ export const Navbar = () => {
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/*" element={<Home />} />
+                <Route path="/ouser" element={<OUser />} />
               </>
             )
             :

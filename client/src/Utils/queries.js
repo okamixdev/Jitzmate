@@ -40,6 +40,36 @@ export const FIND_POST = gql`
     }
 `;
 
+export const FIND_USER = gql`
+    query FindUser($userId: ID!) {
+    findUser(userID: $userId) {
+      _id
+      email
+      avatar
+      username
+      first
+      last
+      belt {
+        _id
+      }
+      followers {
+        _id
+      }
+      follows {
+        _id
+      }
+      posts {
+        _id
+      }
+      followersCount
+      followsCount
+      fullName
+      postsCount
+    }
+  }
+`;
+
+
 export const FIND_COMMENT = gql`
     query FindComments($postId: ID!) {
     findComments(postId: $postId) {

@@ -113,6 +113,11 @@ userSchema.virtual('followersCount').get(function () {
     return this.followers.length;
 });
 
+// When we query a user, we'll also get another field called `posts` with the number of posts we have.
+userSchema.virtual('postsCount').get(function () {
+    return this.posts.length;
+});
+
 // --------------------------------------------------------------------
 // Creates the user model using the UserSchema
 const User = model('User', userSchema);
