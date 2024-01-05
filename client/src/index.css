@@ -372,6 +372,7 @@ code {
 
 .card-user-info h3 {
   color: var(--accent2);
+  cursor: pointer;
 }
 
 .caption {
@@ -463,4 +464,113 @@ code {
   margin-left: 76px;
 }
 
-.create-post-form {}
+.noStyle {
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------- */
+/* OUSER INFO to FOLLOW */
+.osuer-info-div {
+  min-height: 100vh;
+}
+
+.osuer-info-div button {
+  border: 2px solid var(--accent2);
+  padding: 0 5px 0 5px;
+  margin: 0 auto;
+  border-radius: 30px;
+  background-image: var(--accent);
+  color: white;
+  font-weight: bold;
+}
+
+.ouser-feed-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.ouser-info {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
+  border-radius: 10px;
+  padding: 10px 0 10px 0;
+}
+
+.ouser-img {
+  margin-left: 20px;
+}
+
+.follow-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.osuer-follows {
+  display: flex;
+  gap: 20px;
+  margin-right: 20px;
+}
+
+.follow-info {
+  border-radius: 30px;
+  padding: 0 10px 0 10px;
+  font-size: 10px;
+}
+
+.ouser-feed {
+  background-color: var(--accent2);
+}
+
+.ouser-feed img {
+  width: 300px;
+  height: auto;
+}
+
+.ouser-username {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: var(--accent2);
+}
+
+.ouser-avatar {
+  width: 200px;
+  border-radius: 50%;
+  border: 2px solid var(--accent2);
+}
+
+.ouser-description {
+  margin-top: 20px;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+}
+
+.ouser-feed {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.ouser-feed img {
+  width: 300px;
+  height: 220px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}

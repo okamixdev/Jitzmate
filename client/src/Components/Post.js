@@ -7,6 +7,8 @@ import { Comment } from './Comment';
 import { FIND_POST } from '../Utils/queries';
 import axios from 'axios'
 import Auth from '../Utils/auth';
+import { NavLink, Routes, BrowserRouter, Route } from 'react-router-dom';
+import { OUser } from './pages/OUser';
 
 
 
@@ -56,61 +58,51 @@ export const Post = (props) => {
         setLiked(false);
     }
 
-    const headers = {
-        'Authorization': `${Auth.getToken()}`,
-        "Content-Type": "multipart/form-data"
-    }
-
-    const postImage = () => {
-        const imageInfo = axios.get(`http://localhost:3001/api/post/getImage/${ID}`, { headers: headers })
-            .then(response => { console.log(response) })
-            .catch(error => console.log(error))
-    };
-
     const imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
 
-
     return (
-        <div className='card-container'>
-            <div className='card-user-info'>
-                <img src={props.avatar}></img>
-                <h3>{postData.data?.findPosts[0].user.username}</h3>
-            </div>
+        <>
+            <div className='card-container'>
+                <div className='card-user-info'>
+                    <img src={props.avatar}></img>
+                    <NavLink className='noStyle' to="/ouser" state={{ postID: `${ID}`, user: `${postData.data?.findPosts[0].user._id}` }} ><h3>{postData.data?.findPosts[0].user.username}</h3></NavLink>
+                </div>
 
-            <img src={imgSource}></img>
-            <div className='caption'>
-                <h2>{props.caption}</h2>
-                <div className='like-comment'>
-                    {postData.data?.findPosts[0].likes.find((element) => element._id === props.userID) ?
+                <img src={imgSource}></img>
+                <div className='caption'>
+                    <h2>{props.caption}</h2>
+                    <div className='like-comment'>
+                        {postData.data?.findPosts[0].likes.find((element) => element._id === props.userID) ?
 
-                        (
+                            (
 
-                            <>
-                                <i class="fa-solid fa-heart b-activate" onClick={handleDislike}></i>
-                            </>
+                                <>
+                                    <i class="fa-solid fa-heart b-activate" onClick={handleDislike}></i>
+                                </>
+                            )
+                            :
+                            (
+                                <>
+                                    <i className="fa-regular fa-heart boton b-activate" onClick={handleLike}></i>
+                                </>
+                            )
+                        }
+                        <div className='count b-activate'>{postData.data?.findPosts[0].likeCount}</div>
+
+                        <i className="fa-regular fa-comment boton b-activate"></i>
+                    </div>
+                </div>
+
+                <div className='comment-container'>
+                    {commentData.findComments?.map(comments => {
+                        return (
+                            <div>
+                                <Comment username={comments.user.username} text={comments.comment} />
+                            </div>
                         )
-                        :
-                        (
-                            <>
-                                <i className="fa-regular fa-heart boton b-activate" onClick={handleLike}></i>
-                            </>
-                        )
-                    }
-                    <div className='count b-activate'>{postData.data?.findPosts[0].likeCount}</div>
-
-                    <i className="fa-regular fa-comment boton b-activate"></i>
+                    })}
                 </div>
             </div>
-
-            <div className='comment-container'>
-                {commentData.findComments?.map(comments => {
-                    return (
-                        <div>
-                            <Comment username={comments.user.username} text={comments.comment} />
-                        </div>
-                    )
-                })}
-            </div>
-        </div>
+        </>
     )
 }
