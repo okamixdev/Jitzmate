@@ -21,7 +21,6 @@ export const Home = () => {
         <div className='feed-container'>
 
             {feedData.feed?.map(post => {
-
                 return (
                     <Post
                         username='demoUser'
@@ -32,13 +31,7 @@ export const Home = () => {
                         userID={Auth.getProfile().data._id}
                     />
                 )
-
-
             })}
-
-
-
-
         </div>
     )
 }

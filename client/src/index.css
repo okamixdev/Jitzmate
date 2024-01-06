@@ -355,6 +355,22 @@ code {
   border-radius: 10px;
 }
 
+.card-container img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.post-image {
+  /* width: 400px;
+  height: 400px; */
+  align-items: center;
+  text-align: center;
+  display: flex;
+  margin: 0 auto;
+  background-color: #030303;
+}
+
 .card-user-info {
   display: flex;
   align-items: center;
@@ -479,7 +495,7 @@ code {
   padding: 0 5px 0 5px;
   margin: 0 auto;
   border-radius: 30px;
-  background-image: var(--accent);
+  background-color: var(--accent2);
   color: white;
   font-weight: bold;
 }
@@ -573,4 +589,19 @@ code {
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
+}
+
+
+.naked-post {
+  cursor: pointer;
+}
+
+.follow-btn {
+  cursor: pointer;
+}
+
+.follow-btn:hover {
+  transition: all 300ms ease-in-out;
+  transform: scale(1.05);
+  background-color: var(--accent3);
 }

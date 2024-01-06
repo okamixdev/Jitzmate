@@ -1,30 +1,38 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client';
-import { FIND_POST } from '../../Utils/queries';
-import { ADD_LIKE } from '../../Utils/mutations'
-import { REMOVE_LIKE } from '../../Utils/mutations';
 import { FIND_USER } from '../../Utils/queries';
-import { NakedPost } from '../NakedPost';
-
+import { TransitionsModal } from '../extraComponents/TransitionsModal';
+import { ADD_FOLLOW } from '../../Utils/mutations';
+import { REMOVE_FOLLOW } from '../../Utils/mutations';
+import Auth from '../../Utils/auth';
 
 export const OUser = () => {
+
 
     const location = useLocation();
     const ID = location.state.postID;
 
-
-
-    const postData = useQuery(FIND_POST, { variables: { username: location.state.postID } });
-    const imgSource = ``;
-
     const userData = useQuery(FIND_USER, { variables: { userId: location.state.user } })
 
-    const [like] = useMutation(ADD_LIKE, { refetchQueries: [FIND_POST] });
-    const [liked, setLiked] = useState(false);
+    const [follow] = useMutation(ADD_FOLLOW, { refetchQueries: [FIND_USER] });
+    const [unfollow] = useMutation(REMOVE_FOLLOW, { refetchQueries: [FIND_USER] });
 
-    const [dislike] = useMutation(REMOVE_LIKE, { refetchQueries: [FIND_POST] });
+    const handleFollow = async (e) => {
+        e.preventDefault();
 
+        const { data } = await follow({
+            variables: { follows: userData.data?.findUser._id }
+        })
+    };
+
+    const handleUnfollow = async (e) => {
+        e.preventDefault();
+
+        const { data } = await unfollow({
+            variables: { followId: userData.data?.findUser._id }
+        })
+    };
 
     return (
         <div className='osuer-info-div'>
@@ -42,7 +50,19 @@ export const OUser = () => {
                             <div className='follow-info'><h2>{userData.data?.findUser.followsCount}</h2><h3>Following</h3></div>
                             <div className='follow-info'><h2>{userData.data?.findUser.postsCount}</h2><h3>Posts</h3></div>
                         </div>
-                        <button>FOLLOW</button>
+                        {userData.data?.findUser.followers?.find((element) => element._id === Auth.getProfile().data._id) ?
+                            (
+                                <>
+                                    <button className='follow-btn' onClick={handleUnfollow}>UNFOLLOW</button>
+                                </>
+                            ) :
+                            (
+                                <>
+                                    <button className='follow-btn' onClick={handleFollow}>FOLLOW</button>
+                                </>
+                            )
+                        }
+
                     </div>
                 </div>
 
@@ -54,8 +74,11 @@ export const OUser = () => {
                     {userData.data?.findUser.posts?.map(post => {
                         return (
                             <div>
-                                <NakedPost postImage={`http://localhost:3001/api/post/getImage/${post._id}`} />
+                                <TransitionsModal
+                                    text={post.text}
+                                    _id={post._id} />
                             </div>
+
                         )
                     })}
                 </div>
