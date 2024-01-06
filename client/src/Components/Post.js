@@ -68,7 +68,9 @@ export const Post = (props) => {
                     <NavLink className='noStyle' to="/ouser" state={{ postID: `${ID}`, user: `${postData.data?.findPosts[0].user._id}` }} ><h3>{postData.data?.findPosts[0].user.username}</h3></NavLink>
                 </div>
 
-                <img src={imgSource}></img>
+                <div className='post-image'>
+                    <img src={imgSource}></img>
+                </div>
                 <div className='caption'>
                     <h2>{props.caption}</h2>
                     <div className='like-comment'>

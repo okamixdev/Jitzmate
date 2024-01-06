@@ -269,12 +269,20 @@ const resolvers = {
 
         },
 
-        removeFollow: async (root, { followId }, context) => {
+        removeFollow: async (root, args, context) => {
             if (context.user) {
                 const followData = await Follow.findOneAndDelete({
-                    user: context.user._id, follows: followId
+                    user: context.user._id, follows: args.followId
                 });
-                return followData;
+                const userData = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { follows: args.followId } }
+                );
+                const otherUserData = await User.findOneAndUpdate(
+                    { _id: args.followId },
+                    { $pull: { followers: context.user._id } }
+                );
+                return followData, userData, otherUserData;
             };
             // Throws an auth error if the user is not logged in.
             throw new AuthenticationError("You need to be logged in");
