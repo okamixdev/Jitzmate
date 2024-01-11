@@ -44,7 +44,7 @@ code {
 
 .navbar h1 {
   margin-left: 30px;
-  color: var(--accent3);
+  color: var(--accent2);
 }
 
 .navbar h1:hover {
@@ -481,7 +481,7 @@ code {
 }
 
 .noStyle {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 /* --------------------------------------------------------------------------- */

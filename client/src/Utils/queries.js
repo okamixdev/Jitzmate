@@ -137,6 +137,9 @@ export const ALL_USERS = gql`
     allUsers {
         _id
         username
+        posts {
+        _id
+        }
     }
     }
 `;
