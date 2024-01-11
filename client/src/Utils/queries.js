@@ -132,4 +132,13 @@ export const FEED = gql`
     }
 `;
 
+export const ALL_USERS = gql`
+    query AllUsers {
+    allUsers {
+        _id
+        username
+    }
+    }
+`;
+
 

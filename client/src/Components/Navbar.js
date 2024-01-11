@@ -7,6 +7,7 @@ import { Profile } from './pages/Profile';
 import { Login } from './pages/Login';
 import Auth from "../Utils/auth"
 import { OUser } from './pages/OUser';
+import { AsyncSearchBar } from './extraComponents/AsyncSearchBar';
 
 
 
@@ -24,6 +25,7 @@ export const Navbar = () => {
               Auth.loggedIn() ?
                 (
                   <>
+                    <AsyncSearchBar />
                     <li>
                       <NavLink className={({ isActive }) => isActive ? "active" : "unactive"} to="/home"><i class="fa-solid fa-house"></i></NavLink>
                     </li>

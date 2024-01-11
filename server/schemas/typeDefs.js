@@ -75,6 +75,7 @@ const typeDefs = gql`
     type Query {
         me: User
         findUser(userID: ID!): User
+        allUsers: [User]
         allPosts: [Post]
         findPosts(username: ID!): [Post]
         findComments(postId: ID!): [Comment]
