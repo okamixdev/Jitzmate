@@ -19,7 +19,6 @@ export const Home = () => {
 
     return (
         <div className='feed-container'>
-
             {feedData.feed?.map(post => {
                 return (
                     <Post

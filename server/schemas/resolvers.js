@@ -138,6 +138,22 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in in order to get access!')
         },
 
+        allUsers: async (root, args, context) => {
+            if (context.user) {
+                return await User.find({})
+                    .select('-__v -password')
+                    .populate('posts')
+                    .populate('followers')
+                    .populate({ path: 'followers', model: 'User' })
+                    .populate('follows')
+                    .populate({ path: 'follows', model: 'User' })
+                    .populate('achievements')
+                    .populate({ path: 'belt', model: 'Belt' })
+            }
+            // Throws new error if you are not logged in.
+            throw new AuthenticationError('You need to be logged in in order to get access!')
+        },
+
     },
 
     Mutation: {

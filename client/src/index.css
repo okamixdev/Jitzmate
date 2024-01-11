@@ -605,3 +605,15 @@ code {
   transform: scale(1.05);
   background-color: var(--accent3);
 }
+
+
+
+/*  */
+#asynchronous-demo {
+  height: 0;
+
+}
+
+.MuiInputBase-root {
+  height: 30px;
+}
