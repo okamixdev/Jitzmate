@@ -5,6 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { ALL_USERS } from '../../Utils/queries';
 import { useQuery } from '@apollo/client';
 import { Paper } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 function sleep(duration) {
     return new Promise((resolve) => {
@@ -64,6 +65,7 @@ export const AsyncSearchBar = () => {
                 "& fieldset": { border: 'none' }, 'height': '30px', 'padding-top': '0px',
                 // 'padding-bottom': '0px', "& [aria-activedescendant]": { bgcolor: "blue" }
                 // '& + .MuiAutocomplete-popper .MuiAutocomplete-option': { bgcolor: '#ff5858' },
+
             }}
 
             open={open}
@@ -80,8 +82,9 @@ export const AsyncSearchBar = () => {
             renderOption={(props, option) => {
                 const { username } = option;
                 return (
-                    <span {...props} style={{ backgroundColor: '#ff5858', 'border-radius': '30px' }}>
-                        {username}
+                    <span {...props} style={{ backgroundColor: '#ff5858', 'border-radius': '30px', 'text-decoration': 'none !important', 'color': 'inherit' }}>
+                        <NavLink style={{ color: 'inherit' }} className='noStyle' to="/ouser" state={{ user: `${option._id}` }} >{username}</NavLink>
+                        {/* {username} */}
                     </span>
                 );
             }}
@@ -100,7 +103,6 @@ export const AsyncSearchBar = () => {
 
                         endAdornment: (
                             <React.Fragment style={{ 'background-color': 'blue' }}>
-
                                 {loading ? <CircularProgress color="inherit" size={20} /> : null}
                                 {params.InputProps.endAdornment}
                             </React.Fragment>
