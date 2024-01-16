@@ -25,12 +25,22 @@ export const Post = (props) => {
 
     const [dislike] = useMutation(REMOVE_LIKE, { refetchQueries: [FIND_POST] });
 
+    const [commentToggle, setCommentToggle] = useState(false);
+
     useEffect(() => {
         if (data) {
             setCommentData(data)
         }
     })
 
+    let commentClass;
+
+    if (commentToggle) {
+        commentClass = 'show';
+    }
+    else {
+        commentClass = 'hide';
+    }
 
     const handleLike = async (e) => {
         e.preventDefault();
@@ -91,11 +101,12 @@ export const Post = (props) => {
                         }
                         <div className='count b-activate'>{postData.data?.findPosts[0].likeCount}</div>
 
-                        <i className="fa-regular fa-comment boton b-activate"></i>
+                        <i className="fa-regular fa-comment boton b-activate" onClick={() => setCommentToggle(!commentToggle)}></i>
                     </div>
                 </div>
 
-                <div className='comment-container'>
+                {/* style={{ display: `${commentClass}` }} */}
+                <div className={`comment-container ${commentClass}`}>
                     {commentData.findComments?.map(comments => {
                         return (
                             <div>
