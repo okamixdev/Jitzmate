@@ -110,7 +110,11 @@ export const Post = (props) => {
                     {commentData.findComments?.map(comments => {
                         return (
                             <div>
-                                <Comment username={comments.user.username} text={comments.comment} />
+                                <Comment 
+                                    open = {commentToggle}
+                                    username={comments.user.username}
+                                    text={comments.comment}
+                                />
                             </div>
                         )
                     })}
