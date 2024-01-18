@@ -61,7 +61,7 @@ export const AsyncSearchBar = () => {
             disablePortal
             id="asynchronous-demo"
             sx={{
-                width: 180, bgcolor: '#ff5858', 'border-radius': '30px',
+                width: 180, bgcolor: '#ff5858', backgroundImage: 'linear-gradient(-60deg, #ff5858 0%, #f09819 100%)' , 'border-radius': '30px',
                 "& fieldset": { border: 'none' }, 'height': '30px', 'padding-top': '0px',
                 // 'padding-bottom': '0px', "& [aria-activedescendant]": { bgcolor: "blue" }
                 // '& + .MuiAutocomplete-popper .MuiAutocomplete-option': { bgcolor: '#ff5858' },

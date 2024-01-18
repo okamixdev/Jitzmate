@@ -16,12 +16,19 @@ export const Comment = (props) => {
     const ref = useRef(null);
 
     useEffect(() => {
-        if (ref.current) {
-            setShowReadMore(ref.current.scrollHeight !== ref.current.clientHeight);
-        }
+        // if (ref.current) {
+        //     setShowReadMore(ref.current.scrollHeight !== ref.current.clientHeight);
+        // }
+        if (props.text.length > 90) {
+            setShowReadMore(true)
+        } else (
+            setShowReadMore(false)
+        )
     }, [])
 
     console.log(props.open)
+    console.log(showReadMore)
+    console.log(props.text.length)
 
     return (
         <div style={props.open ? { display: 'block' } : { display: 'none' }} className=''>
