@@ -463,7 +463,8 @@ code {
 
 .read-more {
   border: 2px solid var(--accent2);
-  background-color: var(--accent2);
+  background-color: black;
+  color: wheat;
 }
 
 .u-name {
