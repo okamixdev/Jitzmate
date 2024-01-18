@@ -1,6 +1,7 @@
 :root {
   --negro: #030303;
   --accent: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
+  --accent0: linear-gradient(to right, #434343 0%, black 100%);
   --accent2: #ff5858;
   --accent3: #f09819;
 }
@@ -40,16 +41,24 @@ code {
   align-items: center;
   color: white;
   border-bottom: 2px solid white;
+  height: 80px;
+  text-align: center;
 }
 
 .navbar h1 {
   margin-left: 30px;
-  color: var(--accent2);
+  color: white;
+  background-image: var(--accent);
+  padding: 2px 15px 8px 15px;
+  align-items: center;
+  text-align: center;
+  border-radius: 30px;
 }
 
 .navbar h1:hover {
   color: var(--accent2);
   transform: scale(1.01);
+  background-image: var(--accent0);
   transition: 700ms all;
   cursor: pointer;
 }
@@ -439,6 +448,7 @@ code {
 /* COMMENTS */
 .comment-container {
   background-image: var(--accent);
+  background-color: var(--accent2);
   border-radius: 0 0 6px 6px;
 }
 
@@ -481,7 +491,7 @@ code {
 }
 
 .noStyle {
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
 /* --------------------------------------------------------------------------- */
