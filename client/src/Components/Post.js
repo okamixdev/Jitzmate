@@ -3,6 +3,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { FIND_COMMENT } from '../Utils/queries'
 import { ADD_LIKE } from '../Utils/mutations'
 import { REMOVE_LIKE } from '../Utils/mutations';
+import { ADD_COMMENT } from '../Utils/mutations';
 import { Comment } from './Comment';
 import { FIND_POST } from '../Utils/queries';
 import axios from 'axios'
@@ -26,6 +27,10 @@ export const Post = (props) => {
     const [dislike] = useMutation(REMOVE_LIKE, { refetchQueries: [FIND_POST] });
 
     const [commentToggle, setCommentToggle] = useState(false);
+
+    const [addComment] = useMutation(ADD_COMMENT, { refetchQueries: [FIND_COMMENT], variables: { postId: ID } })
+
+    const [newComment, setNewComment] = useState("");
 
     useEffect(() => {
         if (data) {
@@ -70,6 +75,21 @@ export const Post = (props) => {
 
     const imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
 
+    const handleAddComment = async (e) => {
+        e.preventDefault();
+
+        try {
+
+            const { data } = await addComment({
+                variables: { comment: newComment, post: props.postId }
+            })
+
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+
     return (
         <>
             <div className='card-container'>
@@ -110,16 +130,26 @@ export const Post = (props) => {
                     {commentData.findComments?.map(comments => {
                         return (
                             <div>
-                                <Comment 
-                                    open = {commentToggle}
+                                <Comment
+                                    open={commentToggle}
                                     username={comments.user.username}
                                     text={comments.comment}
                                 />
                             </div>
                         )
                     })}
+
+                    <div className={`${commentClass}`} style={{
+                        alignItems: 'center', justifyContent: 'center',
+                        margin: '0 auto', marginBottom: '20px'
+                    }}>
+                        <input type='text' placeholder='comment' onChange={(e) => setNewComment(e.target.value)}></input>
+                        <button onClick={handleAddComment}>Add Comment</button>
+                    </div>
+
+
                 </div>
-            </div>
+            </div >
         </>
     )
 }

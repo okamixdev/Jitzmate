@@ -26,9 +26,9 @@ export const Comment = (props) => {
         )
     }, [])
 
-    console.log(props.open)
-    console.log(showReadMore)
-    console.log(props.text.length)
+    // console.log(props.open)
+    // console.log(showReadMore)
+    // console.log(props.text.length)
 
     return (
         <div style={props.open ? { display: 'block' } : { display: 'none' }} className=''>

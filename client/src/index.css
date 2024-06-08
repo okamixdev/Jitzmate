@@ -654,7 +654,7 @@ code {
   display: block;
   opacity: 1;
   /* transition: opacity 1000ms, display 1000ms; */
-  animation: showAnimation 1s ease-in-out;
+  /* animation: showAnimation 1s ease-in-out; */
 }
 
 .hide {
@@ -662,7 +662,7 @@ code {
   display: block;
   height: 2px;
   border-radius: 10px;
-  
+
   padding-top: 5px;
   /* margin-top: 10px; */
   /* opacity: 0; */
@@ -678,7 +678,15 @@ code {
   display: none;
 }
 
-@keyframes showAnimation{
+.hide button {
+  display: none;
+}
+
+.hide input {
+  display: none;
+}
+
+@keyframes showAnimation {
   from {
     border-radius: 5px;
     width: 50%;
