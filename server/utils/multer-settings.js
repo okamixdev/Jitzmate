@@ -3,15 +3,32 @@
 
 // Imports multer
 const multer = require('multer');
+const SharpMulter = require("sharp-multer");
+
+// // Set up multer storage
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, './uploads/postImages/')
+//     },
+
+//     filename: (req, file, cb) => {
+//         cb(null, 'post-' + Date.now() + '--' + file.originalname);
+//     }
+// });
 
 // Set up multer storage
-const storage = multer.diskStorage({
+const storage = SharpMulter({
     destination: (req, file, cb) => {
         cb(null, './uploads/postImages/')
     },
 
-    filename: (req, file, cb) => {
-        cb(null, 'post-' + Date.now() + '--' + file.originalname);
+    imageOptions: {
+        filename: (req, file, cb) => {
+            cb(null, 'post-' + Date.now() + '--' + file.originalname);
+        },
+        fileFormat: "jpg",
+        quality: 80,
+        resize: { width: 500, height: 500 },
     }
 });
 

@@ -350,6 +350,9 @@ code {
 
 .feed-container {
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .card-container {
@@ -371,13 +374,20 @@ code {
 }
 
 .post-image {
-  /* width: 400px;
-  height: 400px; */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   align-items: center;
   text-align: center;
   display: flex;
   margin: 0 auto;
-  background-color: #030303;
+  background-color: #0303033b;
+}
+
+.post-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 .card-user-info {
@@ -608,12 +618,11 @@ code {
   padding: 10px 20px 10px 20px;
   align-items: center;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 10px;
 }
 
 .ouser-feed img {
-  width: 300px;
-  height: 220px;
+  overflow: hidden;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -622,7 +631,10 @@ code {
 
 
 .naked-post {
+  width: 50%;
+  height: 50%;
   cursor: pointer;
+  object-fit: contain;
 }
 
 .follow-btn {
@@ -637,7 +649,7 @@ code {
 
 
 
-/*  */
+/* COMMENT */
 #asynchronous-demo {
   height: 0;
 
@@ -650,24 +662,24 @@ code {
 
 .show {
   transition: all .5s ease-in-out;
-  transform: translateX(0%);
+  transform: translateY(0%);
   display: block;
   opacity: 1;
-  /* transition: opacity 1000ms, display 1000ms; */
+  transition: opacity 1000ms, display 1000ms, ease-in-out .7s;
   /* animation: showAnimation 1s ease-in-out; */
 }
 
 .hide {
-  transition: all .5s ease-in-out;
+  transition: all .2s ease-in-out;
   display: block;
   height: 2px;
   border-radius: 10px;
-
+  margin: 0 auto;
   padding-top: 5px;
   /* margin-top: 10px; */
   /* opacity: 0; */
   width: 50%;
-  transform: translateX(50%);
+  transform: translateY(50%);
 }
 
 .hide p {
@@ -693,7 +705,7 @@ code {
     border-radius: 10px;
     padding-top: 5px;
     width: 60%;
-    transform: translateX(50%);
+    transform: translateX(25%);
   }
 
   to {
