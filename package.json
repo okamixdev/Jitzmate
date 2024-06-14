@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "build":"webpack",
   "scripts": {
     "start": "node server/server.js",
     "dev": "concurrently \"cd server && npm run start\" \"cd client && npm start\" \"cd server && cd config && node seed.js\"",
@@ -10,7 +11,8 @@
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "keywords": [],
   "author": "",
