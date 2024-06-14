@@ -84,6 +84,8 @@ export const Post = (props) => {
                 variables: { comment: newComment, post: props.postId }
             })
 
+            setNewComment("");
+
         } catch (err) {
             console.log(err);
         }
