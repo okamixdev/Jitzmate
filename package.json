@@ -10,7 +10,8 @@
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "keywords": [],
   "author": "",
