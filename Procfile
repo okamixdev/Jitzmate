@@ -1,2 +1,1 @@
-web: npm run dev index.js
-
+web: npm run start
