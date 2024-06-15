@@ -73,7 +73,7 @@ export const Post = (props) => {
         setLiked(false);
     }
 
-    const imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
+    const imgSource = `${process.env.WEBPAGE_URI}/api/post/getImage/${ID}` || `http://localhost:3001/api/post/getImage/${ID}`;
 
     const handleAddComment = async (e) => {
         e.preventDefault();
