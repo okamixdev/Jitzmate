@@ -14,7 +14,7 @@
     "build": "cd client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm install npm && npm run build"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "keywords": [],
   "author": "",
