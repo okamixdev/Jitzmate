@@ -42,7 +42,7 @@ app.use(express.json());
 app.use("/uploads/postImages", express.static('uploads'))
 
 // CORS Configuration
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 
 // Use the routes
