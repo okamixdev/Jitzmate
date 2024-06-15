@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 // httpLink for Apollo Client
 const httpLink = createHttpLink({
-  uri: `http://localhost:${PORT}/graphql`,
+  uri: `/graphql`,
 });
 
 // authLink dor Apollo Client
