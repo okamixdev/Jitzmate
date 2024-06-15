@@ -7,9 +7,11 @@ import { setContext } from 'apollo-link-context';
 // --------------------------------------------------------------------------------
 // Apollo Setup
 
+const PORT = process.env.PORT || 3001;
+
 // httpLink for Apollo Client
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: `http://localhost:${PORT}/graphql`,
 });
 
 // authLink dor Apollo Client
