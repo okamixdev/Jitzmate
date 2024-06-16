@@ -27,7 +27,7 @@ const storage = SharpMulter({
             cb(null, 'post-' + Date.now() + '--' + file.originalname);
         },
         fileFormat: "jpg",
-        quality: 80,
+        quality: 100,
         resize: { width: 500, height: 500 },
     }
 });

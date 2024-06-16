@@ -3,6 +3,7 @@
 const Post = require('../models/Post');
 const fs = require('fs');
 const path = require('path');
+const cloudinary = require('../utils/cloudinary');
 
 // test
 const chekAPI = async (req, res) => {
@@ -50,15 +51,36 @@ const uploadImage = async (req, res) => {
 
     // Save the image to the DB
     try {
-        // Update the user
-        const postImgInfo = await Post.findByIdAndUpdate({ user: req.user.id, _id: postID }, { file: req.file.filename }, { new: true })
+        // // // Update the user
+        // const postImgInfo = await Post.findByIdAndUpdate({ user: req.user.id, _id: postID }, { file: req.file.filename }, { new: true })
+        // // Return result
+        // res.status(200).send({
+        //     status: 'SUCCESS',
+        //     message: 'Image uploaded succesfully',
+        //     post: postImgInfo,
+        //     post_image: image,
+        //     // result
+        // })
 
-        // Return result
-        res.status(200).send({
-            status: 'SUCCESS',
-            message: 'Image uploaded succesfully',
-            post: postImgInfo,
-            post_image: image,
+        cloudinary.uploader.upload(req.file.path, async (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send({
+                    status: 'ERROR',
+                    message: 'Error with cloudinary'
+                })
+            }
+
+            //Update the user
+            const postImgInfo = await Post.findByIdAndUpdate({ user: req.user.id, _id: postID }, { file: result.secure_url }, { new: true })
+            // Return result
+            res.status(200).send({
+                status: 'SUCCESS',
+                message: 'Image uploaded succesfully',
+                post: postImgInfo,
+                post_image: image,
+                result
+            })
         })
 
     } catch (err) {
