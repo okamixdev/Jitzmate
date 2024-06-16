@@ -4,6 +4,7 @@ const Post = require('../models/Post');
 const fs = require('fs');
 const path = require('path');
 const cloudinary = require('../utils/cloudinary');
+const streamifier = require('streamifier')
 
 // test
 const chekAPI = async (req, res) => {
@@ -62,16 +63,50 @@ const uploadImage = async (req, res) => {
         //     // result
         // })
 
-        cloudinary.uploader.upload(`../server/uploads/postImages/${req.file.filename}`, async (err, result) => {
-            console.log(req.file)
-            if (err) {
-                console.log(err);
-                return res.status(500).send({
-                    status: 'ERROR',
-                    message: 'Error with cloudinary'
-                })
-            }
+        // cloudinary.uploader.upload(req.file.path, async (err, result) => {
+        //     console.log(req.file)
+        //     if (err) {
+        //         console.log(err);
+        //         return res.status(500).send({
+        //             status: 'ERROR',
+        //             message: 'Error with cloudinary'
+        //         })
+        //     }
 
+        //     //Update the user
+        //     const postImgInfo = await Post.findByIdAndUpdate({ user: req.user.id, _id: postID }, { file: result.secure_url }, { new: true })
+        //     // Return result
+        //     res.status(200).send({
+        //         status: 'SUCCESS',
+        //         message: 'Image uploaded succesfully',
+        //         post: postImgInfo,
+        //         post_image: image,
+        //         result,
+        //         pathInfo: req.file.path
+        //     })
+        // })
+
+        const options = { width: 500, height: 500, crop: "scale" };
+
+        let streamUpload = (req) => {
+            return new Promise((resolve, reject) => {
+                let stream = cloudinary.uploader.upload_stream(
+                    options,
+                    (error, result) => {
+                        if (result) {
+                            resolve(result);
+                        } else {
+                            reject(error);
+                        }
+                    }
+                );
+
+                streamifier.createReadStream(req.file.buffer).pipe(stream);
+            });
+        };
+
+        async function upload(req) {
+            let result = await streamUpload(req);
             //Update the user
             const postImgInfo = await Post.findByIdAndUpdate({ user: req.user.id, _id: postID }, { file: result.secure_url }, { new: true })
             // Return result
@@ -81,9 +116,12 @@ const uploadImage = async (req, res) => {
                 post: postImgInfo,
                 post_image: image,
                 result,
-                pathInfo: req.file
+                pathInfo: req.file.path
             })
-        })
+            // console.log(result);
+        }
+
+        upload(req);
 
     } catch (err) {
         return res.status(500).send({

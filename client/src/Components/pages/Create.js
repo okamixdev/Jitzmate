@@ -33,7 +33,7 @@ export const Create = () => {
       }
 
       const result = await axios.post(`/api/post/upload/${data.addPost._id}`, formData, { headers: headers })
-        .then(response => { })
+        .then(response => { console.log(response) })
         .catch(error => console.log(error))
 
     } catch (err) {
