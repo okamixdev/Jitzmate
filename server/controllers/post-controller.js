@@ -86,7 +86,7 @@ const uploadImage = async (req, res) => {
         //     })
         // })
 
-        const options = { width: 500, height: 500, crop: "scale" };
+        const options = { width: 500, height: 500, crop: "fill" };
 
         let streamUpload = (req) => {
             return new Promise((resolve, reject) => {
