@@ -62,8 +62,8 @@ const uploadImage = async (req, res) => {
         //     // result
         // })
 
-        cloudinary.uploader.upload(req.file.path, async (err, result) => {
-            console.log()
+        cloudinary.uploader.upload(`../server/uploads/postImages/${req.file.filename}`, async (err, result) => {
+            console.log(req.file)
             if (err) {
                 console.log(err);
                 return res.status(500).send({
@@ -80,7 +80,8 @@ const uploadImage = async (req, res) => {
                 message: 'Image uploaded succesfully',
                 post: postImgInfo,
                 post_image: image,
-                result
+                result,
+                pathInfo: req.file
             })
         })
 

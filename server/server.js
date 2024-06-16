@@ -41,8 +41,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/uploads/postImages", express.static('uploads'))
 
+
+let corsOptions = {
+    origin: ["URL ALLOWED"],
+};
 // CORS Configuration
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Use the routes
