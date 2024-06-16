@@ -4,6 +4,15 @@ const Post = require('../models/Post');
 const fs = require('fs');
 const path = require('path');
 
+// test
+const chekAPI = async (req, res) => {
+    return res.status(200).send({
+        status: 'SUCCESS',
+        message: 'API WORKING'
+    })
+}
+
+
 // -------------------------------------------------------------------------
 // Upload Files
 const uploadImage = async (req, res) => {
@@ -86,4 +95,5 @@ const showImage = async (req, res) => {
 module.exports = {
     uploadImage,
     showImage,
+    chekAPI
 };
