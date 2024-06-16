@@ -61,6 +61,7 @@ export const FIND_USER = gql`
       posts {
         _id
         text
+        file
       }
       followersCount
       followsCount
