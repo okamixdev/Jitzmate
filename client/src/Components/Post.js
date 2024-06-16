@@ -73,8 +73,25 @@ export const Post = (props) => {
         setLiked(false);
     }
 
-    const imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
-    
+    let imgSource;
+    const PORT = process.env.PORT;
+
+    switch (process.env.NODE_ENV) {
+        case ('production'):
+            imgSource = `${PORT}/api/post/getImage/${ID}`;
+            break;
+        default:
+            imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
+            break;
+
+    }
+
+    // if (process.env.NODE_ENV === 'production') {
+    //     const imgSource = `${PORT}/api/post/getImage/${ID}`
+    // }
+    // const imgSource = `http://localhost:3001/api/post/getImage/${ID}`
+
+
     //'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg';
     //`http://localhost:3001/api/post/getImage/${ID}`
 
