@@ -28,7 +28,8 @@ export const Create = () => {
 
       const headers = {
         'Authorization': `${Auth.getToken()}`,
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*"
       }
 
       const result = await axios.post(`/api/post/upload/${data.addPost._id}`, formData, { headers: headers })
