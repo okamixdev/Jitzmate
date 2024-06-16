@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 // httpLink for Apollo Client
 const httpLink = createHttpLink({
-  uri: process.env.GRAPHQL_ENDPOINT || `http://localhost:3001/graphql`, // this is the issue
+  uri: '/graphql',
 });
 
 // authLink dor Apollo Client
@@ -31,9 +31,6 @@ const authLink = setContext((_, { headers }) => {
 // Create Apollo Clinet
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  // link: new createUploadLink({
-  //   uri: 'http://localhost:3000/'
-  // }),
   cache: new InMemoryCache(),
 });
 
