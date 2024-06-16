@@ -76,7 +76,9 @@ export const OUser = () => {
                             <div>
                                 <TransitionsModal
                                     text={post.text}
-                                    _id={post._id} />
+                                    _id={post._id} 
+                                    file={post.file}
+                                    />
                             </div>
 
                         )
