@@ -78,7 +78,7 @@ export const Post = (props) => {
 
     switch (process.env.NODE_ENV) {
         case ('production'):
-            imgSource = `${PORT}/api/post/getImage/${ID}`;
+            imgSource = `/api/post/getImage/${ID}`;
             break;
         default:
             imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
