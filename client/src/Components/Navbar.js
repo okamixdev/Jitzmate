@@ -58,7 +58,7 @@ export const Navbar = () => {
             (
               <>
                 <Route path="/" element={<Home />} />
-                // <Route path="/home" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/create" element={<Create />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/profile" element={<Profile />} />
