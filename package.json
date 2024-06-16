@@ -7,7 +7,7 @@
     "node": "20.13.1"
   },
   "scripts": {
-    "start": "concurrently \"cd server && npm run start\" \"cd client && npm start\" \"cd server && cd config && node seed.js\"",
+    "start": "node server/server.js",
     "dev": "concurrently \"cd server && npm run start\" \"cd client && npm start\" \"cd server && cd config && node seed.js\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
