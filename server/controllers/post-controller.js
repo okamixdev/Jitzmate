@@ -63,6 +63,7 @@ const uploadImage = async (req, res) => {
         // })
 
         cloudinary.uploader.upload(req.file.path, async (err, result) => {
+            console.log()
             if (err) {
                 console.log(err);
                 return res.status(500).send({

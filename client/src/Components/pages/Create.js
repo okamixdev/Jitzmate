@@ -31,7 +31,7 @@ export const Create = () => {
         "Content-Type": "multipart/form-data"
       }
 
-      const result = await axios.post(`http://localhost:3001/api/post/upload/${data.addPost._id}`, formData, { headers: headers })
+      const result = await axios.post(`/api/post/upload/${data.addPost._id}`, formData, { headers: headers })
         .then(response => { })
         .catch(error => console.log(error))
 
