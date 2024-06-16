@@ -73,7 +73,9 @@ export const Post = (props) => {
         setLiked(false);
     }
 
-    const imgSource = 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg';
+    const imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
+    
+    //'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg';
     //`http://localhost:3001/api/post/getImage/${ID}`
 
     const handleAddComment = async (e) => {
