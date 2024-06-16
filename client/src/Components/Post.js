@@ -78,12 +78,11 @@ export const Post = (props) => {
 
     switch (process.env.NODE_ENV) {
         case ('production'):
-            imgSource = `/api/post/getImage/${ID}`;
+            imgSource = postData.data?.findPosts[0].file;
             break;
         default:
-            imgSource = `http://localhost:3001/api/post/getImage/${ID}`;
+            imgSource = postData.data?.findPosts[0].file;
             break;
-
     }
 
     // if (process.env.NODE_ENV === 'production') {
