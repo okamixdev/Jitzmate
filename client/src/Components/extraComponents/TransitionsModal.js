@@ -33,7 +33,7 @@ export const TransitionsModal = (props) => {
     return (
         <div>
             <div onClick={handleOpen}>
-                <NakedPost postImage={`http://localhost:3001/api/post/getImage/${props._id}`} />
+                <NakedPost postImage={`${props.file}`} />
             </div>
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -55,6 +55,7 @@ export const TransitionsModal = (props) => {
                             postImage='https://media.gettyimages.com/id/1401887026/photo/asian-man-practicing-brazilian-jujutsu-closeup-of-hand-holding-belt.jpg?s=2048x2048&w=gi&k=20&c=qBLR4wtKXyu8Lh9Hj2JhrbmlQbjVLlyt1IBIok4hAqw='
                             caption={props.text}
                             postId={props._id}
+                            file={props.file}
                             userID={Auth.getProfile().data._id}
                         />
                     </Box>
