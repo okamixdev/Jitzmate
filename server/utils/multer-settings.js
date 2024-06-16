@@ -33,7 +33,7 @@ const storage = SharpMulter({
 });
 
 // Set up multer file filter
-const uploads = multer({ storage: storage });
+const uploads = multer(); // { storage: storage }
 
 
 module.exports = {
