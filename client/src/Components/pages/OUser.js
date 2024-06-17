@@ -7,13 +7,14 @@ import { ADD_FOLLOW } from '../../Utils/mutations';
 import { REMOVE_FOLLOW } from '../../Utils/mutations';
 import Auth from '../../Utils/auth';
 
-export const OUser = () => {
+export const OUser = (props) => {
 
 
     const location = useLocation();
-    const ID = location.state.postID;
+    const ID = props._id || location.state.user;
 
-    const userData = useQuery(FIND_USER, { variables: { userId: location.state.user } })
+    const userData = useQuery(FIND_USER, { variables: { userId: ID } })
+
 
     const [follow] = useMutation(ADD_FOLLOW, { refetchQueries: [FIND_USER] });
     const [unfollow] = useMutation(REMOVE_FOLLOW, { refetchQueries: [FIND_USER] });
@@ -34,6 +35,17 @@ export const OUser = () => {
         })
     };
 
+    const handleAvatar = async (e) => {
+        e.preventDefault();
+
+        // const { data } = await unfollow({
+        //     variables: { followId: userData.data?.findUser._id }
+        // })
+
+        console.log('avatar')
+
+    };
+
     return (
         <div className='osuer-info-div'>
 
@@ -41,7 +53,19 @@ export const OUser = () => {
                 <div className='ouser-info'>
                     <div className='ouser-img'>
                         <div className='ouser-username'>{userData.data?.findUser.username}</div>
-                        <img className='ouser-avatar' src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'></img>
+                        <img onClick={handleAvatar} className={`${ID === Auth.getProfile().data._id ? 'ouser-avatar-u' : 'ouser-avatar'}`} src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'></img>
+
+                        {ID === Auth.getProfile().data._id ?
+                            (
+                                <>
+                                    <i className="fa-solid fa-pen-to-square edit-text"></i>
+                                </>
+                            ) :
+                            (
+                                <>
+                                </>
+                            )
+                        }
                     </div>
 
                     <div className='follow-container'>
@@ -50,18 +74,32 @@ export const OUser = () => {
                             <div className='follow-info'><h2>{userData.data?.findUser.followsCount}</h2><h3>Following</h3></div>
                             <div className='follow-info'><h2>{userData.data?.findUser.postsCount}</h2><h3>Posts</h3></div>
                         </div>
-                        {userData.data?.findUser.followers?.find((element) => element._id === Auth.getProfile().data._id) ?
+
+                        {ID === Auth.getProfile().data._id ?
                             (
                                 <>
-                                    <button className='follow-btn' onClick={handleUnfollow}>UNFOLLOW</button>
+
                                 </>
                             ) :
                             (
                                 <>
-                                    <button className='follow-btn' onClick={handleFollow}>FOLLOW</button>
+                                    {userData.data?.findUser.followers?.find((element) => element._id === Auth.getProfile().data._id) ?
+                                        (
+                                            <>
+                                                <button className='follow-btn' onClick={handleUnfollow}>UNFOLLOW</button>
+                                            </>
+                                        ) :
+                                        (
+                                            <>
+                                                <button className='follow-btn' onClick={handleFollow}>FOLLOW</button>
+                                            </>
+                                        )
+                                    }
                                 </>
                             )
                         }
+
+
 
                     </div>
                 </div>
@@ -76,9 +114,9 @@ export const OUser = () => {
                             <div>
                                 <TransitionsModal
                                     text={post.text}
-                                    _id={post._id} 
+                                    _id={post._id}
                                     file={post.file}
-                                    />
+                                />
                             </div>
 
                         )
