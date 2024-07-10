@@ -82,6 +82,7 @@ export const FIND_COMMENT = gql`
         }
         user {
             username
+            _id
         }
     }
     }

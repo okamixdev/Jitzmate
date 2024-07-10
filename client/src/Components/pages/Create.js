@@ -45,7 +45,7 @@ export const Create = () => {
   return (
 
     <div className='create-container'>
-      <h1>Create</h1>
+      <h1>New Post</h1>
 
 
       <form className='create-post-form' onSubmit={handleFormSubmit}>

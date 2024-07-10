@@ -459,7 +459,12 @@ code {
 .comment-container {
   background-image: var(--accent);
   background-color: var(--accent2);
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0;
+  /*6px 6px */
+  max-height: 300px;
+  overflow:hidden;
+  overflow-y: scroll;
+  word-wrap: break-word; 
 }
 
 .comment-container p {
@@ -468,20 +473,24 @@ code {
   overflow: hidden;
   -webkit-box-orient: vertical;
   display: -webkit-box; */
-  width: 430px;
+  max-width: 75%;
 }
 
 .read-more {
   border: 2px solid var(--accent2);
-  background-color: black;
-  color: wheat;
+  background-color: var(--accent);
+  color: var(--accent);
+  display: block;
 }
 
 .u-name {
   font-size: 16px;
   color: var(--accent2);
   cursor: pointer;
-
+  text-decoration: none;
+  background-image: var(--accent0);
+  padding: 3px 8px;
+  border-radius: 30px;
 }
 
 .comment-info {
@@ -493,15 +502,62 @@ code {
   align-items: center;
 }
 
+.comment-button {
+  padding: 10px 0px;
+  margin: 0 auto;
+}
+
+.comment-button input {
+  margin: 0 auto;
+  border: 2px solid var(--accent2);
+  border-radius: 20px;
+  text-align: center;
+  padding: 3px;
+  margin-right: 10px;
+  background-color: rgb(245, 245, 245);
+  color: var(--negro);
+}
+
+.comment-button input:focus {
+  background-color: var(--accent0);
+  color: var(--accent);
+  outline: 0;
+}
+
+.comment-button i {
+  background: transparent;
+  color: var(--accent2);
+  font-size: 100%;
+  outline: none;
+  border: none;
+}
+
+.comment-button i:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+  transition: ease-in 200ms;
+}
+
 
 /* --------------------------------------------------------------------------- */
 /* CREATE POST */
 .create-container {
   min-height: 100vh;
-
   margin: 0 auto;
   align-items: center;
   text-align: center;
+}
+
+.create-container h1 {
+  background-image: var(--accent0);
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  border: 3px solid var(--accent2);
+  padding: 5px 8px;
+  color: var(--accent2);
 }
 
 .create-post-form {
@@ -512,7 +568,9 @@ code {
   align-items: center;
   text-align: center;
   border: 3px solid var(--accent2);
+  border-radius: 30px;
   padding: 100px 300px 100px 300px;
+  background-image: var(--accent0);
 }
 
 .create-post-form .files {
@@ -628,7 +686,7 @@ code {
   transition: ease-in-out 300ms;
 }
 
-.ouser-avatar-u:hover ~ .edit-text {
+.ouser-avatar-u:hover~.edit-text {
   cursor: pointer;
   color: aqua;
   visibility: visible;
@@ -731,6 +789,10 @@ code {
 }
 
 .hide input {
+  display: none;
+}
+
+.hide i {
   display: none;
 }
 

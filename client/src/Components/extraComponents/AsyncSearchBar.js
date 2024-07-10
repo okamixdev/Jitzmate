@@ -48,7 +48,7 @@ export const AsyncSearchBar = () => {
         };
     }, [loading]);
 
-    console.log(options)
+    // console.log(options)
 
     React.useEffect(() => {
         if (!open) {
