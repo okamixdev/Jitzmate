@@ -16,12 +16,7 @@ export const Profile = () => {
   return (
 
     <>
-      <h1>Profile</h1>
-
       <OUser _id={Auth.getProfile().data?._id} />
-
-
-
 
 
 

@@ -111,6 +111,7 @@ export const Post = (props) => {
 
     }
 
+
     return (
         <>
             <div className='card-container'>
@@ -155,6 +156,7 @@ export const Post = (props) => {
                                     open={commentToggle}
                                     username={comments.user.username}
                                     text={comments.comment}
+                                    id={comments.user._id}
                                 />
                             </div>
                         )
@@ -164,11 +166,13 @@ export const Post = (props) => {
                         alignItems: 'center', justifyContent: 'center',
                         margin: '0 auto', marginBottom: '20px'
                     }}>
-                        <input type='text' placeholder='comment' onChange={(e) => setNewComment(e.target.value)}></input>
-                        <button onClick={handleAddComment}>Add Comment</button>
+
                     </div>
 
-
+                </div>
+                <div className={`${commentClass} comment-button`}>
+                    <input type='text' placeholder='comment' onChange={(e) => setNewComment(e.target.value)}></input>
+                    <i onClick={handleAddComment} class="fa-solid fa-plus"></i>
                 </div>
             </div >
         </>

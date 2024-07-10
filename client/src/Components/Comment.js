@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { NavLink } from 'react-router-dom';
 
 const paragraphStyle = {
     WebkitLineClamp: '2',
@@ -29,17 +30,17 @@ export const Comment = (props) => {
     // console.log(props.open)
     // console.log(showReadMore)
     // console.log(props.text.length)
-
     return (
         <div style={props.open ? { display: 'block' } : { display: 'none' }} className=''>
             <div className='comment-info'>
-                <h2 className='u-name'>{props.username}</h2>
+                <h2 className='u-name'> <NavLink className='u-name' to="/ouser" state={{ user: `${props.id}` }} >{props.username}</NavLink></h2>
                 <p style={isOpen ? null : paragraphStyle} ref={ref}>{props.text}</p>
                 {showReadMore && (
                     <button className='read-more' onClick={() => setIsOpen(!isOpen)}>
-                        {isOpen ? 'Read Less' : 'Read More'}
+                        {isOpen ? <i class="fa-solid fa-sort-up"></i> : <i class="fa-solid fa-sort-down"></i>}
                     </button>
                 )}
+                
             </div>
         </div>
     )
