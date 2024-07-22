@@ -41,7 +41,7 @@ code {
   justify-content: space-between;
   align-items: center;
   color: white;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid var(--accent2);
   height: 80px;
   text-align: center;
 }
@@ -337,8 +337,13 @@ code {
   transform: translateX(200%);
 } */
 
+.log-container {
+  height: 100vh;
+}
+
 .container {
   margin: 0 auto;
+  margin-top: 60px;
   width: 400px;
   height: 630px;
   background: red;
@@ -915,6 +920,7 @@ label {
 
   .container {
     margin: 0 auto;
+    margin-top: 0;
     width: 100%;
     height: 90vh;
     overflow: hidden;
@@ -1012,7 +1018,7 @@ label {
   /* FEED */
 
   .feed-container {
-    min-height: 100vh;
+    min-height: 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -1026,9 +1032,7 @@ label {
     width: 100%;
     height: auto;
     margin: 0 auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    border-radius: 10px;
+    border-radius: 0;
   }
 
   .card-container img {
@@ -1206,6 +1210,7 @@ label {
   /* --------------------------------------------------------------------------- */
   /* CREATE POST */
   .create-container {
+    max-width: 100%;
     min-height: 100vh;
     margin: 0 auto;
     align-items: center;
@@ -1214,7 +1219,7 @@ label {
 
   .create-container h1 {
     background-image: var(--accent0);
-    width: 300px;
+    width: 80%;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -1225,25 +1230,244 @@ label {
   }
 
   .create-post-form {
+    width: 80%;
+    height: 300px;
     display: flex;
-    width: 400px;
-    margin: 0 auto;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    border: 3px solid var(--accent2);
-    border-radius: 30px;
-    padding: 100px 300px 100px 300px;
+    padding: 0;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+
     background-image: var(--accent0);
   }
 
+  .text-in-create {
+    text-decoration: none;
+    border: 2px solid var(--accent2);
+    border-radius: 6px;
+    background-color: transparent;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+  }
+
   .create-post-form .files {
-    margin-left: 76px;
+    margin-bottom: 20px;
+  }
+
+  .create-post-form button {
+    border: 2px solid var(--accent2);
+    border-radius: 10px;
+    background-color: var(--accent2);
+    color: #030303;
+    font-weight: bold;
+    padding: 5px 10px;
+    letter-spacing: .7px;
+  }
+
+  .create-post-form input[type='file'] {
+    display: none;
+  }
+
+  .create-post-form label {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 2px dashed var(--accent2);
+    padding: 10px 20px;
   }
 
   .noStyle {
     text-decoration: none;
   }
 
+  /* --------------------------------------------------------------------------- */
+  /* OUSER INFO to FOLLOW */
+  .osuer-info-div {
+    min-height: 100vh;
+  }
+
+  .ouser-cont {
+    width: 100%;
+  }
+
+  .osuer-info-div button {
+    border: 2px solid var(--accent2);
+    padding: 5px 10px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: var(--accent2);
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .ouser-feed-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+
+
+  .ouser-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    border-radius: 0;
+    padding: 20px 0px;
+  }
+
+  .ouser-img {
+    margin-left: 0px;
+    position: relative;
+  }
+
+  .ouser-img img {
+    width: 25%;
+    margin: 0 auto;
+  }
+
+  .follow-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .osuer-follows {
+    display: flex;
+    gap: 20px;
+    margin-right: 0px;
+    background-image: var(--accent);
+    border-radius: 10px;
+    padding: 0px 20px;
+  }
+
+  .follow-info {
+    border-radius: 30px;
+    padding: 0 10px 0 10px;
+    font-size: 10px;
+  }
+
+  .ouser-feed {
+    background-color: var(--accent2);
+  }
+
+  .ouser-feed img {
+    width: 300px;
+    height: auto;
+  }
+
+  .ouser-username {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: var(--accent2);
+  }
+
+  .ouser-avatar {
+    width: 200px;
+    border-radius: 50%;
+    border: 2px solid var(--accent2);
+    display: block;
+  }
+
+  .ouser-avatar-u {
+    width: 200px;
+    border-radius: 50%;
+    border: 2px solid var(--accent2);
+    display: block;
+    cursor: pointer;
+  }
+
+  .edit-text {
+    position: absolute;
+    bottom: 38%;
+    left: 44%;
+    visibility: hidden;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  .ouser-avatar-u:hover {
+    cursor: pointer;
+    opacity: .5;
+    border: 2px solid aqua;
+    transition: ease-in-out 300ms;
+  }
+
+  .ouser-avatar-u:hover~.edit-text {
+    cursor: pointer;
+    color: aqua;
+    visibility: visible;
+    transition: ease-in-out 300ms;
+    z-index: 3;
+  }
+
+
+
+  .ouser-description {
+    margin-top: 0;
+    border-top: 2px dashed var(--accent2);
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    border-radius: 0;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .ouser-feed {
+    border-top: 2px dashed var(--accent2);
+    border-bottom: 2px solid var(--accent2);
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    border-radius: 0;
+    padding: 10px 20px 10px 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .ouser-feed img {
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+
+
+  .naked-post {
+    width: 50%;
+    height: 50%;
+    cursor: pointer;
+    object-fit: contain;
+  }
+
+  .follow-btn {
+    cursor: pointer;
+  }
+
+  .follow-btn:hover {
+    transition: all 300ms ease-in-out;
+    transform: scale(1.05);
+    background-color: var(--accent3);
+  }
 
 }
