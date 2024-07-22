@@ -84,7 +84,7 @@ export const Login = () => {
 
   return (
 
-    <div>
+    <div className='log-container'>
 
       <div className='container'>
 

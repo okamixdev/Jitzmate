@@ -47,19 +47,21 @@ export const Create = () => {
     <div className='create-container'>
       <h1>New Post</h1>
 
+      <div className='create-post-form' >
+        <form onSubmit={handleFormSubmit}>
+          <input className='text-in-create' type='text' placeholder='Caption' onChange={e => {
+            setCaption(e.target.value)
+          }}></input>
+          <input className='files' type='file' accept='image/*' onChange={e => {
+            setFile(e.target.files[0])
+          }}></input>
+          <label for="file"><i class="fa-solid fa-image"></i>Upload</label>
+          <button type='submit' onClick={() => { setPostFormData({ texto: caption, files: file.name }) }}>Submit</button>
+        </form>
+      </div>
 
-      <form className='create-post-form' onSubmit={handleFormSubmit}>
-        <input type='text' placeholder='Caption' onChange={e => {
-          setCaption(e.target.value)
-        }}></input>
-        <input className='files' type='file' accept='image/*' onChange={e => {
-          setFile(e.target.files[0])
-        }}></input>
-        <button type='submit' onClick={() => { setPostFormData({ texto: caption, files: file.name }) }}>Submit</button>
-      </form>
 
-
-    </div>
+    </div >
 
   )
 }
