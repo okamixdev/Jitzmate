@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { ADD_POST } from '../../Utils/mutations';
 import axios from 'axios'
@@ -11,6 +11,10 @@ export const Create = () => {
   const [caption, setCaption] = useState("");
   const [postFormData, setPostFormData] = useState({ texto: "", files: "" });
   const [create] = useMutation(ADD_POST);
+  const hiddenFileInput = useRef(null);
+  const handleClick = () => {
+    hiddenFileInput.current.click();
+  }
 
 
 
@@ -52,10 +56,10 @@ export const Create = () => {
           <input className='text-in-create' type='text' placeholder='Caption' onChange={e => {
             setCaption(e.target.value)
           }}></input>
-          <input className='files' type='file' accept='image/*' onChange={e => {
+          <input className='files' ref={hiddenFileInput} type='file' accept='image/*' onChange={e => {
             setFile(e.target.files[0])
           }}></input>
-          <label for="file"><i class="fa-solid fa-image"></i>Upload</label>
+          <label onClick={handleClick} for="file"><i class="fa-solid fa-image"></i>Upload</label>
           <button type='submit' onClick={() => { setPostFormData({ texto: caption, files: file.name }) }}>Submit</button>
         </form>
       </div>
