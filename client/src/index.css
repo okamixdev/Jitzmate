@@ -368,6 +368,7 @@ label {
   font-size: 2.3em;
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 60px;
   font-weight: bold;
   cursor: pointer;
@@ -678,6 +679,63 @@ label {
   margin-left: 76px;
 }
 
+.text-in-create {
+  text-decoration: none;
+  border: 2px solid var(--accent2);
+  border-radius: 6px;
+  background-color: transparent;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  outline: none;
+}
+
+.text-in-create:focus {
+  transition: ease-in-out .2s;
+  transform: scale(1.05);
+  border: 2px solid var(--accent3);
+}
+
+.create-post-form .files {
+  margin-bottom: 20px;
+}
+
+.create-post-form button {
+  border: 2px solid var(--accent2);
+  border-radius: 10px;
+  background-color: var(--accent2);
+  color: #030303;
+  font-weight: bold;
+  padding: 5px 10px;
+  letter-spacing: .7px;
+}
+
+.create-post-form button:hover {
+  transition: ease-in-out .3s;
+  cursor: pointer;
+  transform: scale(1.1);
+  color: var(--accent2);
+  background-color: transparent;
+  border: 2px solid var(--accent2);
+}
+
+.create-post-form input[type='file'] {
+  display: none;
+}
+
+.create-post-form label {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border: 2px dashed var(--accent2);
+  padding: 10px 20px;
+}
+
 .noStyle {
   text-decoration: none;
 }
@@ -772,28 +830,28 @@ label {
 }
 
 .edit-text {
+  visibility: hidden;
   position: absolute;
   bottom: 38%;
   left: 44%;
-  visibility: hidden;
   font-size: 30px;
   cursor: pointer;
+  color: var(--accent2);
+  transition: ease-in-out 300ms;
+  z-index: 3;
 }
 
 .ouser-avatar-u:hover {
   cursor: pointer;
   opacity: .5;
-  border: 2px solid aqua;
+  outline: 4px solid var(--accent3);
   transition: ease-in-out 300ms;
 }
 
 .ouser-avatar-u:hover~.edit-text {
-  cursor: pointer;
-  color: aqua;
   visibility: visible;
-  transition: ease-in-out 300ms;
-  z-index: 3;
 }
+
 
 
 
@@ -841,6 +899,65 @@ label {
   transform: scale(1.05);
   background-color: var(--accent3);
 }
+
+/* EDIT OUSER */
+
+.change-user-data-cont {
+  background-color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.change-user-data-cont form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.change-user-data-cont input[type='file'] {
+  display: none;
+}
+
+.change-user-data-cont label {
+  border: 2px dashed var(--accent2);
+  border-radius: 10px;
+  padding: 10px 20px;
+  gap: 10px;
+}
+
+.change-user-data-cont button {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #030303;
+}
+
+.change-user-data-cont button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  transition: ease-in-out .2s;
+  background-color: transparent;
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+
+.change-info {
+  background-image: var(--accent0);
+  text-align: center;
+  padding: 10px 0px;
+  border-radius: 10px;
+  margin-bottom: -10px;
+}
+
+.change-cont {
+  background-image: var(--accent);
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* ///////////////////////////////// */
 
 
 

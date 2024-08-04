@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client';
 import { FIND_USER } from '../../Utils/queries';
@@ -45,6 +45,43 @@ export const OUser = (props) => {
         console.log('avatar')
 
     };
+
+    const [file, setFile] = useState({});
+    const [caption, setCaption] = useState("");
+    const [postFormData, setPostFormData] = useState({ texto: "", files: "" });
+    const hiddenFileInput = useRef(null);
+    const handleClick = () => {
+        hiddenFileInput.current.click();
+    }
+
+
+
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            // const { data } = await create({
+            //     variables: { ...postFormData }
+            // })
+
+            const formData = new FormData()
+            formData.append('file', file)
+
+            const headers = {
+                'Authorization': `${Auth.getToken()}`,
+                "Content-Type": "multipart/form-data",
+                "Access-Control-Allow-Origin": "*"
+            }
+
+            // const result = await axios.post(`/api/post/upload/${data.addPost._id}`, formData, { headers: headers })
+            //     .then(response => { console.log(response) })
+            //     .catch(error => console.log(error))
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <div className='osuer-info-div'>
@@ -105,8 +142,29 @@ export const OUser = (props) => {
                         </div>
                     </div>
 
-                    <div className='ouser-description'>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div className='change-cont'>
+                        <h1 className='change-info'>Change profile picture</h1>
+
+                        <div className='ouser-description'>
+                            {ID === Auth.getProfile().data._id ?
+                                (
+                                    <div className='change-user-data-cont'>
+
+                                        <form onSubmit={handleFormSubmit}>
+                                            <input className='files' ref={hiddenFileInput} type='file' accept='image/*' onChange={e => {
+                                                setFile(e.target.files[0])
+                                            }}></input>
+                                            <label onClick={handleClick} for="file"><i class="fa-solid fa-image"></i>New Profile Pic</label>
+                                            <button type='submit' onClick={() => { setPostFormData({ texto: caption, files: file.name }) }}>Submit</button>
+                                        </form>
+                                    </div>
+                                ) :
+                                (
+                                    <>
+                                    </>
+                                )
+                            }
+                        </div>
                     </div>
 
                     <div className='ouser-feed'>
