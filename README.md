@@ -4,7 +4,7 @@
 
 ## Description
 
-"Bundle Spares" is a specialized e-commerce platform designed for gamers and gaming enthusiasts. It provides a unique service by offering spare keys for video games that users can claim. Users can create accounts, explore a wide range of available game keys, add them to their carts, save games they're interested in for later, and view their claimed keys. The app features a robust authentication system to ensure user data security and privacy, offering gamers a convenient and secure way to access spare game keys for their favorite titles.
+"Jitzmate" is a social media intended for Jiu-Jitsu practitioners and can be used to share images, comments or just information about the sport.
 
 ## Table of Contents
 
