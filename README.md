@@ -1,6 +1,6 @@
 # Jitzmate
 
-![Screenshot](./assets/demo.jpg)
+![Screenshot](./assets/image.png)
 
 ## Description
 
